@@ -733,6 +733,11 @@ function crearVisor(host, { encuadre = 3.4, fov = 38, dist = 6.2, alto = 1.7 } =
   scene.add(pivot);
 
   function colocar(obj) {
+    // Normalizar antes de medir. Si el objeto llega ya transformado, la caja
+    // envolvente sale en otra escala y el factor que se calcule estara mal.
+    obj.position.set(0, 0, 0);
+    obj.scale.setScalar(1);
+    obj.rotation.set(0, 0, 0);
     obj.rotation.x = MODEL_FIX_X;
     // Centrar y escalar sobre la caja YA rotada, si no el encuadre sale torcido.
     const caja = new THREE.Box3().setFromObject(obj);
@@ -830,8 +835,11 @@ function respaldo() {
 new GLTFLoader().load(
   "assets/kaax.glb",
   (gltf) => {
+    // El clon se saca ANTES de colocar nada: colocar() muta el objeto que
+    // recibe, y clonar despues copiaba un modelo ya escalado y desplazado.
+    const copia = gltf.scene.clone(true);
     hero.colocar(gltf.scene);
-    proto.colocar(gltf.scene.clone(true));   // clon: un objeto no puede tener dos padres
+    proto.colocar(copia);
     aviso?.remove();
     heroHost.classList.add("listo");
   },

@@ -74,18 +74,24 @@ h2{font-size:clamp(1.9rem,4.2vw,2.9rem);font-weight:700;margin-bottom:14px}
 }
 
 /* ---------- portada ---------- */
-.hero{min-height:100svh;display:grid;place-items:center;text-align:center;
-  padding-top:calc(var(--nav) + 24px);
-  background:radial-gradient(1200px 620px at 50% -12%,var(--teal-50),#fff 62%)}
-.hero .logo{width:min(420px,72vw);margin:0 auto 26px;animation:rise 1s cubic-bezier(.22,1,.36,1) both}
+/* Portada al estilo de una página de producto: el texto arriba, el objeto
+   grande y centrado ocupando todo lo que sobra. */
+.hero{min-height:100svh;display:grid;grid-template-rows:auto 1fr;text-align:center;
+  padding:calc(var(--nav) + 26px) clamp(20px,5vw,40px) 0;
+  background:radial-gradient(1200px 620px at 50% -12%,var(--teal-50),#fff 62%);
+  overflow:hidden}
+.hero-copy{max-width:1120px;margin:0 auto;width:100%}
+.hero-stage{position:relative;width:100%;min-height:240px;margin-top:8px}
+.hero-stage canvas{display:block;width:100%;height:100%}
+.hero .logo{width:min(320px,60vw);margin:0 auto 20px;animation:rise 1s cubic-bezier(.22,1,.36,1) both}
 .hero .logo-fallback{font-size:clamp(3rem,11vw,6rem);font-weight:700;letter-spacing:.06em;
   color:var(--green);margin-bottom:18px;animation:rise 1s cubic-bezier(.22,1,.36,1) both}
 @keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
 .hero .tag{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
   color:var(--teal-600);margin-bottom:18px;animation:rise 1s .1s cubic-bezier(.22,1,.36,1) both}
-.hero h1{font-size:clamp(2.1rem,5.6vw,3.8rem);font-weight:700;max-width:17ch;margin:0 auto 20px;
+.hero h1{font-size:clamp(2rem,5.2vw,3.5rem);font-weight:700;max-width:17ch;margin:0 auto 16px;
   animation:rise 1s .2s cubic-bezier(.22,1,.36,1) both}
-.hero p{max-width:56ch;margin:0 auto 34px;color:var(--ink-2);font-size:clamp(1rem,1.7vw,1.15rem);
+.hero p{max-width:54ch;margin:0 auto 24px;color:var(--ink-2);font-size:clamp(.96rem,1.5vw,1.08rem);
   animation:rise 1s .3s cubic-bezier(.22,1,.36,1) both}
 .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;
   animation:rise 1s .4s cubic-bezier(.22,1,.36,1) both}
@@ -135,11 +141,12 @@ h2{font-size:clamp(1.9rem,4.2vw,2.9rem);font-weight:700;margin-bottom:14px}
 /* ---------- prototipo 3D ---------- */
 .proto{background:linear-gradient(180deg,#fff,var(--bg-soft) 30%,var(--bg-soft) 70%,#fff)}
 .stage{display:grid;grid-template-columns:1fr 1fr;gap:38px;align-items:start}
-.viewer{position:sticky;top:calc(var(--nav) + 18px);height:min(70vh,540px);
+.viewer{position:sticky;top:calc(var(--nav) + 18px);height:min(70vh,540px);cursor:grab;touch-action:none;
   border-radius:var(--r);overflow:hidden;background:
     radial-gradient(70% 60% at 50% 38%,#fff,var(--teal-50));
   border:1px solid var(--line)}
 .viewer canvas{display:block;width:100%;height:100%}
+.viewer:active{cursor:grabbing}
 .viewer .badge{position:absolute;left:14px;bottom:13px;font-family:var(--mono);font-size:.63rem;
   letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
   background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:999px;padding:5px 11px}
@@ -152,6 +159,9 @@ h2{font-size:clamp(1.9rem,4.2vw,2.9rem);font-weight:700;margin-bottom:14px}
 .spec:hover{border-color:var(--teal-100);transform:translateX(3px)}
 .spec dt{font-size:.87rem;color:var(--muted)}
 .spec dd{font-family:var(--mono);font-size:.85rem;color:var(--ink);text-align:right;font-weight:500}
+.wip{display:inline-block;margin-left:7px;font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;
+  background:#fff4e6;color:#a4622a;border:1px solid #f3d9bd;border-radius:999px;padding:2px 8px;
+  font-weight:600;vertical-align:middle}
 
 /* ---------- código ---------- */
 .repo{display:flex;gap:15px;align-items:flex-start;padding:21px;border:1px solid var(--line);
@@ -267,19 +277,20 @@ footer a:hover{color:#fff}
 
 <!-- ====== PORTADA ====== -->
 <header class="hero" id="inicio">
-  <div class="wrap">
+  <div class="hero-copy">
     <img class="logo" src="assets/logo_kaax_full.png" alt="Kaax"
          onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'logo-fallback',textContent:'KAAX'}))">
     <div class="tag">Equipo CEM · PrepaTec Campus Estado de México</div>
     <h1>Robots que limpian el agua de México</h1>
     <p>Una flota de robots acuáticos que recolecta lirio, sargazo y residuos de presas,
-       lagos y costas — pensada para sumarse a los programas de saneamiento que ya existen,
-       no para sustituirlos.</p>
+       lagos y costas — pensada para sumarse a los programas de saneamiento que ya
+       existen, no para sustituirlos.</p>
     <div class="cta">
       <a class="btn primary" href="#prototipo">Ver el prototipo</a>
       <a class="btn ghost" href="#conocenos">Conoce al equipo</a>
     </div>
   </div>
+  <div class="hero-stage" id="hero-stage"></div>
   <div class="scrollhint">Desplázate</div>
 </header>
 
@@ -341,7 +352,7 @@ footer a:hover{color:#fff}
         <h3>Misión</h3>
         <p>Desarrollar tecnología robótica accesible que recolecte vegetación invasora y
           desechos de presas, lagos, ríos y costas, reduciendo la carga del trabajo manual
-          que hoy se hace a mano y bajo el sol.</p>
+          que hoy se hace a mano y bajo el sol, exponiendo a los trabajadores a riesgos a su salud.</p>
         <p style="margin-top:12px">Kaax se diseña para <b>sumarse</b> a programas federales
           ya financiados, como el saneamiento de presas de CONAGUA, en lugar de competir
           con ellos.</p>
@@ -372,7 +383,7 @@ footer a:hover{color:#fff}
     <div class="stage">
       <div class="viewer" id="viewer">
         <div class="loading" id="viewer-loading">cargando modelo…</div>
-        <div class="badge">Chasis · Base V3 — gira conforme desplazas</div>
+        <div class="badge">Chasis · Base V3 — arrástralo para girarlo</div>
       </div>
 
       <dl class="specs reveal">
@@ -384,6 +395,7 @@ footer a:hover{color:#fff}
         <div class="spec"><dt>Energía</dt><dd>2 × LiPo 4S</dd></div>
         <div class="spec"><dt>Visión</dt><dd>Cámara + Teachable Machine</dd></div>
         <div class="spec"><dt>Seguridad</dt><dd>Failsafe a 1.5 s sin enlace</dd></div>
+        <div class="spec"><dt>Control</dt><dd>Teleoperado <span class="wip">autónomo en desarrollo</span></dd></div>
       </dl>
     </div>
 
@@ -415,6 +427,17 @@ footer a:hover{color:#fff}
         <p>Si el robot deja de recibir órdenes por más de 1.5 segundos, los motores y los
           rodillos se detienen solos. Un rodillo girando sin enlace no se para por sí mismo,
           y esa es justo la situación que el sistema tiene que cubrir.</p>
+      </article>
+      <article class="card reveal">
+        <div class="ic">◐</div>
+        <h3>Autonomía: lo que hay y lo que falta</h3>
+        <p>Hoy Kaax se <b>teleopera</b>: un operador lo conduce desde la estación de control
+          y el robot registra su recorrido por GPS. El <b>modo autónomo está planeado y
+          sigue en desarrollo</b> — la detección de sargazo por color y las rutas
+          predictivas ya están diseñadas, pero todavía no operan solas en el agua.</p>
+        <p style="margin-top:12px">Cuando llegue, será autonomía acotada y siempre bajo
+          supervisión humana. Ante la duda, no captar: un falso positivo tiene consecuencia
+          física sobre fauna viva.</p>
       </article>
       <article class="card reveal">
         <div class="ic">▦</div>
@@ -673,118 +696,153 @@ document.querySelectorAll(".reveal").forEach((el, i) => {
 <script type="module">
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
-/* Visor del robot. Gira en función de cuánto has desplazado la sección del
-   prototipo, no con un temporizador: el control es tuyo, no de una animación.
+/* Dos visores del mismo robot, con propósitos distintos:
+     portada   — grande y centrado, gira conforme desplazas. No se toca.
+     prototipo — el visitante lo arrastra y lo gira a mano.
 
-   El modelo real se carga de assets/kaax.glb. Mientras no exista ese archivo,
-   se arma un robot de reemplazo con primitivas para que el mecanismo se pueda
-   ver y probar; sustituir uno por otro no toca el resto del código. */
-const host = document.getElementById("viewer");
-const loadingEl = document.getElementById("viewer-loading");
+   El GLB se descarga UNA vez y se clona: son 6.5 MB y pedirlo dos veces
+   duplicaría la espera sin ganar nada.
+
+   Orientación: Onshape exporta con el eje largo en Y (0.98) y el corto en Z
+   (0.35). En three.js la vertical es Y, así que el modelo llega de pie sobre
+   la popa. Girando -90° en X el largo pasa a Z y la altura a Y, que es como
+   flota un catamarán. */
+const MODEL_FIX_X = -Math.PI / 2;
 const reduced = matchMedia("(prefers-reduced-motion:reduce)").matches;
 
-const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-renderer.outputColorSpace = THREE.SRGBColorSpace;
-host.appendChild(renderer.domElement);
+function crearVisor(host, { encuadre = 3.4, fov = 38, dist = 6.2, alto = 1.7 } = {}) {
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  host.appendChild(renderer.domElement);
 
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(38, 1, .1, 100);
-camera.position.set(0, 1.7, 6.2);
-camera.lookAt(0, 0, 0);
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(fov, 1, .1, 100);
+  camera.position.set(0, alto, dist);
 
-scene.add(new THREE.HemisphereLight(0xffffff, 0xbcd9e4, 1.5));
-const key = new THREE.DirectionalLight(0xffffff, 2.1);
-key.position.set(4, 7, 5); scene.add(key);
-const rim = new THREE.DirectionalLight(0x69d7ea, 1.1);
-rim.position.set(-5, 2, -4); scene.add(rim);
+  scene.add(new THREE.HemisphereLight(0xffffff, 0xbcd9e4, 1.5));
+  const key = new THREE.DirectionalLight(0xffffff, 2.1); key.position.set(4, 7, 5); scene.add(key);
+  const rim = new THREE.DirectionalLight(0x69d7ea, 1.1); rim.position.set(-5, 2, -4); scene.add(rim);
 
-const model = new THREE.Group();
-scene.add(model);
+  const pivot = new THREE.Group();          // lo que gira
+  scene.add(pivot);
 
-function placeholder() {
-  const g = new THREE.Group();
-  const casco = new THREE.MeshStandardMaterial({ color: 0x15675a, roughness: .45, metalness: .12 });
-  const cubierta = new THREE.MeshStandardMaterial({ color: 0xe8f4f8, roughness: .7 });
-  const detalle = new THREE.MeshStandardMaterial({ color: 0x0077b6, roughness: .4, metalness: .25 });
-  const rodillo = new THREE.MeshStandardMaterial({ color: 0xf4a261, roughness: .6 });
-
-  for (const x of [-1.15, 1.15]) {                       // los dos cascos
-    const h = new THREE.Mesh(new THREE.CapsuleGeometry(.42, 2.5, 8, 20), casco);
-    h.rotation.z = Math.PI / 2; h.position.set(x, 0, 0); g.add(h);
-    const t = new THREE.Mesh(new THREE.CylinderGeometry(.19, .26, .5, 18), detalle);
-    t.rotation.z = Math.PI / 2; t.position.set(x, -.1, -1.62); g.add(t);
+  function colocar(obj) {
+    obj.rotation.x = MODEL_FIX_X;
+    // Centrar y escalar sobre la caja YA rotada, si no el encuadre sale torcido.
+    const caja = new THREE.Box3().setFromObject(obj);
+    const tam = caja.getSize(new THREE.Vector3());
+    const centro = caja.getCenter(new THREE.Vector3());
+    const k = encuadre / Math.max(tam.x, tam.y, tam.z || 1);
+    const cont = new THREE.Group();
+    obj.scale.setScalar(k);
+    obj.position.sub(centro.multiplyScalar(k));
+    cont.add(obj);
+    pivot.add(cont);
   }
-  const deck = new THREE.Mesh(new THREE.BoxGeometry(2.55, .17, 1.75), cubierta);
-  deck.position.y = .42; g.add(deck);
-  const caja = new THREE.Mesh(new THREE.BoxGeometry(1.05, .5, .85), detalle);
-  caja.position.y = .76; g.add(caja);
-  for (const z of [.52, -.52]) {                          // los dos rodillos
-    const r = new THREE.Mesh(new THREE.CylinderGeometry(.2, .2, 1.9, 16), rodillo);
-    r.rotation.z = Math.PI / 2; r.position.set(0, .16, 1.35 + z * .001 + (z > 0 ? .22 : -.22)); g.add(r);
+
+  function medir() {
+    const r = host.getBoundingClientRect();
+    if (!r.width || !r.height) return;
+    renderer.setSize(r.width, r.height, false);
+    camera.aspect = r.width / r.height;
+    camera.updateProjectionMatrix();
   }
-  const mastil = new THREE.Mesh(new THREE.CylinderGeometry(.035, .035, .8, 10), detalle);
-  mastil.position.set(0, 1.36, -.2); g.add(mastil);
-  return g;
+  new ResizeObserver(medir).observe(host);
+  medir();
+
+  let visible = true;
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { threshold: 0 }).observe(host);
+
+  return { renderer, scene, camera, pivot, colocar, ver: () => visible };
 }
 
-function frame(obj) {
-  // Centra y escala lo que sea que se haya cargado, para que un GLB de
-  // cualquier tamaño quede encuadrado sin tocar la cámara.
-  const box = new THREE.Box3().setFromObject(obj);
-  const size = box.getSize(new THREE.Vector3());
-  const center = box.getCenter(new THREE.Vector3());
-  const s = 3.4 / Math.max(size.x, size.y, size.z || 1);
-  obj.scale.setScalar(s);
-  obj.position.sub(center.multiplyScalar(s));
-  model.add(obj);
+// ---------- portada: gira con el desplazamiento ----------
+const heroHost = document.getElementById("hero-stage");
+const hero = crearVisor(heroHost, { encuadre: 3.9, fov: 34, dist: 6.6, alto: 1.35 });
+hero.camera.lookAt(0, 0, 0);
+
+let heroObjetivo = 0, heroActual = 0;
+function heroProgreso() {
+  const r = document.getElementById("inicio").getBoundingClientRect();
+  heroObjetivo = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height)));
+}
+addEventListener("scroll", heroProgreso, { passive: true });
+addEventListener("resize", heroProgreso);
+heroProgreso();
+
+hero.renderer.setAnimationLoop(() => {
+  if (!hero.ver()) return;
+  heroActual += (heroObjetivo - heroActual) * .08;
+  // Una vuelta y media mientras la portada sale de pantalla, más una deriva
+  // lenta para que no se vea congelado al llegar.
+  const t = reduced ? 0 : performance.now() * .00007;
+  hero.pivot.rotation.y = -0.6 + heroActual * Math.PI * 1.5 + t;
+  hero.pivot.rotation.x = 0.12 + heroActual * 0.38;
+  hero.pivot.position.y = -heroActual * 0.8;
+  hero.pivot.scale.setScalar(1 - heroActual * 0.18);
+  hero.renderer.render(hero.scene, hero.camera);
+});
+
+// ---------- prototipo: lo mueve el visitante ----------
+const protoHost = document.getElementById("viewer");
+const proto = crearVisor(protoHost, { encuadre: 3.4, fov: 38, dist: 6.2, alto: 1.7 });
+
+const ctrl = new OrbitControls(proto.camera, proto.renderer.domElement);
+ctrl.enableDamping = true; ctrl.dampingFactor = .075;
+ctrl.enablePan = false;                 // desplazar el objeto solo confunde
+ctrl.minDistance = 3.2; ctrl.maxDistance = 11;
+ctrl.minPolarAngle = .25; ctrl.maxPolarAngle = Math.PI * .82;
+ctrl.autoRotate = !reduced; ctrl.autoRotateSpeed = .9;
+ctrl.target.set(0, 0, 0);
+// Al primer arrastre se apaga el giro automático: a partir de ahí manda el usuario.
+["pointerdown", "wheel", "touchstart"].forEach(ev =>
+  proto.renderer.domElement.addEventListener(ev, () => { ctrl.autoRotate = false; }, { once: true, passive: true }));
+
+proto.renderer.setAnimationLoop(() => {
+  if (!proto.ver()) return;
+  ctrl.update();
+  proto.renderer.render(proto.scene, proto.camera);
+});
+
+// ---------- carga única, dos copias ----------
+const aviso = document.getElementById("viewer-loading");
+function respaldo() {
+  // Sin GLB se arma un robot de referencia, para que la página nunca quede vacía.
+  const g = new THREE.Group();
+  const casco = new THREE.MeshStandardMaterial({ color: 0xe9eef0, roughness: .5 });
+  const azul = new THREE.MeshStandardMaterial({ color: 0x0077b6, roughness: .4, metalness: .2 });
+  for (const x of [-1.15, 1.15]) {
+    const h = new THREE.Mesh(new THREE.CapsuleGeometry(.42, 2.5, 8, 20), casco);
+    h.rotation.z = Math.PI / 2; h.position.set(x, 0, 0); g.add(h);
+  }
+  const deck = new THREE.Mesh(new THREE.BoxGeometry(2.55, .17, 1.75), casco); deck.position.y = .42; g.add(deck);
+  const caja = new THREE.Mesh(new THREE.BoxGeometry(1.05, .5, .85), azul); caja.position.y = .76; g.add(caja);
+  g.rotation.x = -MODEL_FIX_X;           // se compensa el giro que colocar() aplica
+  return g;
 }
 
 new GLTFLoader().load(
   "assets/kaax.glb",
-  (gltf) => { frame(gltf.scene); loadingEl.remove(); },
+  (gltf) => {
+    hero.colocar(gltf.scene);
+    proto.colocar(gltf.scene.clone(true));   // clon: un objeto no puede tener dos padres
+    aviso?.remove();
+    heroHost.classList.add("listo");
+  },
   undefined,
-  () => {                       // todavía no hay modelo: se usa el de reemplazo
-    frame(placeholder());
-    loadingEl.textContent = "modelo de referencia";
-    loadingEl.style.cssText = "position:absolute;left:14px;top:13px;color:#6b8a9c;font-size:.63rem;letter-spacing:.12em;text-transform:uppercase;display:block;place-items:unset";
+  () => {
+    hero.colocar(respaldo());
+    proto.colocar(respaldo());
+    if (aviso) {
+      aviso.textContent = "modelo de referencia";
+      aviso.style.cssText = "position:absolute;left:14px;top:13px;color:#6b8a9c;font-size:.63rem;letter-spacing:.12em;text-transform:uppercase";
+    }
+    heroHost.classList.add("listo");
   }
 );
-
-function resize() {
-  const r = host.getBoundingClientRect();
-  if (!r.width || !r.height) return;
-  renderer.setSize(r.width, r.height, false);
-  camera.aspect = r.width / r.height;
-  camera.updateProjectionMatrix();
-}
-new ResizeObserver(resize).observe(host);
-resize();
-
-// Progreso de 0 a 1 mientras la sección del prototipo cruza la pantalla.
-const proto = document.getElementById("prototipo");
-let target = 0, current = 0;
-function progress() {
-  const r = proto.getBoundingClientRect();
-  const total = r.height + innerHeight;
-  target = Math.min(1, Math.max(0, (innerHeight - r.top) / total));
-}
-addEventListener("scroll", progress, { passive: true });
-addEventListener("resize", progress);
-progress();
-
-let visible = true;
-new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { threshold: 0 }).observe(host);
-
-renderer.setAnimationLoop(() => {
-  if (!visible) return;                 // no gastar GPU fuera de pantalla
-  current += (target - current) * .075; // suavizado: el giro persigue al scroll
-  model.rotation.y = current * Math.PI * 2.3;
-  model.rotation.x = Math.sin(current * Math.PI) * .22 - .06;
-  model.position.y = reduced ? 0 : Math.sin(current * Math.PI * 3) * .07;
-  renderer.render(scene, camera);
-});
 </script>
 </body>
 </html>

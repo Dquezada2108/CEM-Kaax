@@ -178,6 +178,45 @@ table.fin td.n,table.fin th.n{text-align:right;font-family:var(--mono);font-vari
 table.fin tfoot td{font-weight:700;border-bottom:none;border-top:2px solid var(--line)}
 .scroller{overflow-x:auto;-webkit-overflow-scrolling:touch}
 
+.src{font-size:.72rem;color:var(--muted);margin-top:12px;line-height:1.5}
+.ethic{display:flex;gap:26px;align-items:flex-start;flex-wrap:wrap;margin-top:34px;
+  padding:26px 28px;border-radius:var(--r);background:var(--teal-900);color:#cfe9f3}
+.ethic .big{font-size:clamp(2.6rem,6vw,3.8rem);font-weight:700;color:#fff;line-height:1;
+  letter-spacing:-.03em;flex:none}
+.ethic .big span{font-size:.45em;opacity:.7}
+.ethic h3{color:#fff;font-size:1.12rem;margin-bottom:7px}
+.ethic p{font-size:.93rem;max-width:58ch}
+.ethic .src{color:var(--teal-300);opacity:.85}
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:20px}
+.shot{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);
+  background:var(--bg-soft)}
+.shot img{width:100%;height:340px;object-fit:cover;transition:transform .6s cubic-bezier(.22,1,.36,1)}
+.shot:hover img{transform:scale(1.04)}
+.shot figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 16px 13px;
+  font-size:.82rem;color:#fff;
+  background:linear-gradient(transparent,rgba(2,62,88,.86))}
+.tests{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:18px}
+.test{padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:#fff}
+.test .v{font-size:1.5rem;font-weight:700;color:var(--teal-700);letter-spacing:-.02em}
+.test .k{font-size:.8rem;color:var(--muted);margin-top:2px}
+.price{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:20px}
+.price .p{padding:26px;border-radius:var(--r);border:1px solid var(--line);background:#fff}
+.price .p.hi{background:var(--teal-900);color:#cfe9f3;border-color:var(--teal-900)}
+.price .p.hi h3,.price .p.hi .amt{color:#fff}
+.price .amt{font-size:2.1rem;font-weight:700;color:var(--teal-700);letter-spacing:-.03em;
+  font-variant-numeric:tabular-nums}
+.price .per{font-size:.8rem;color:var(--muted);font-weight:500}
+.price .p.hi .per{color:var(--teal-300)}
+.price p{font-size:.88rem;margin-top:9px}
+.bars{display:grid;gap:10px;margin-top:18px}
+.bar{display:grid;grid-template-columns:92px 1fr auto;gap:13px;align-items:center;font-size:.87rem}
+.bar .t{color:var(--muted);font-family:var(--mono);font-size:.78rem}
+.bar .track{height:26px;background:var(--line-2);border-radius:7px;overflow:hidden}
+.bar .fill{height:100%;border-radius:7px;background:linear-gradient(90deg,var(--teal-500),var(--green));
+  width:0;transition:width 1.1s cubic-bezier(.22,1,.36,1)}
+.bar .v{font-family:var(--mono);font-weight:600;font-variant-numeric:tabular-nums}
+.ctx{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:24px}
+
 /* ---------- pie ---------- */
 footer{background:var(--teal-900);color:#cfe9f3;padding:clamp(46px,7vw,72px) clamp(20px,5vw,40px) 34px}
 footer a{color:var(--teal-100)}
@@ -241,9 +280,24 @@ footer a:hover{color:#fff}
 <section id="conocenos">
   <div class="wrap">
     <div class="stats reveal">
-      <div class="stat"><div class="n">653</div><div class="l">presas en México</div></div>
-      <div class="stat"><div class="n">10<span style="font-size:.55em">%</span></div><div class="l">con agua limpia</div></div>
-      <div class="stat"><div class="n">70k+</div><div class="l">hectáreas invadidas por lirio</div></div>
+      <div class="stat"><div class="n">123,400</div><div class="l">toneladas de sargazo en playas</div></div>
+      <div class="stat"><div class="n">70,000</div><div class="l">hectáreas invadidas por lirio acuático</div></div>
+      <div class="stat"><div class="n">148,000</div><div class="l">toneladas de plástico a ríos al año</div></div>
+    </div>
+    <p class="src reveal">SEMARNAT y La Jornada (2026) · CONABIO vía Mongabay (2022) ·
+       PlanRemar, UAM–SEMARNAT–ONU (2022)</p>
+
+    <div class="ethic reveal">
+      <div class="big">46.3<span>%</span></div>
+      <div>
+        <h3>Y el costo lo paga la gente con su salud</h3>
+        <p>de las mediciones de sulfuro de hidrógeno en recolectores de sargazo superó el
+           límite mexicano de exposición para jornadas de ocho horas. Comezón, dolores de
+           cabeza, dermatitis y fatiga.</p>
+        <p class="src" style="margin-top:9px">Rodríguez et al. (2026), <i>Harmful Algae</i> 154.
+           UNAM · Universidad de São Paulo. 35 trabajadores monitoreados con sensores,
+           Quintana Roo, 2025.</p>
+      </div>
     </div>
 
     <div style="margin-top:clamp(46px,7vw,84px)">
@@ -255,19 +309,19 @@ footer a:hover{color:#fff}
       <div class="grid g3 reveal" style="margin-top:32px">
         <article class="card person">
           <div class="avatar">DQ</div>
-          <h3>Diego Quezada</h3>
+          <h3>Diego Quezada Ramírez</h3>
           <div class="role">Líder técnico</div>
           <p>Hardware, firmware y el sistema de control de la flota.</p>
         </article>
         <article class="card person">
           <div class="avatar">YG</div>
-          <h3>Yael García</h3>
+          <h3>Yael García Blanco</h3>
           <div class="role">Diseño y desarrollo</div>
           <p>Diseño mecánico y desarrollo del proyecto.</p>
         </article>
         <article class="card person">
-          <div class="avatar">C</div>
-          <h3>Carvajal</h3>
+          <div class="avatar">DC</div>
+          <h3>Daniel Alejandro Carvajal Macías</h3>
           <div class="role">Investigación</div>
           <p>Investigación y desarrollo del proyecto.</p>
         </article>
@@ -311,7 +365,7 @@ footer a:hover{color:#fff}
     <div class="stage">
       <div class="viewer" id="viewer">
         <div class="loading" id="viewer-loading">cargando modelo…</div>
-        <div class="badge">Gira conforme desplazas</div>
+        <div class="badge">Chasis · Base V3 — gira conforme desplazas</div>
       </div>
 
       <dl class="specs reveal">
@@ -324,6 +378,27 @@ footer a:hover{color:#fff}
         <div class="spec"><dt>Visión</dt><dd>Cámara + Teachable Machine</dd></div>
         <div class="spec"><dt>Seguridad</dt><dd>Failsafe a 1.5 s sin enlace</dd></div>
       </dl>
+    </div>
+
+    <div class="reveal" style="margin-top:clamp(38px,6vw,64px)">
+      <h3 style="font-size:1.25rem;margin-bottom:4px">Funcionamiento en campo</h3>
+      <p style="color:var(--ink-2);font-size:.94rem">Pruebas del prototipo en presa,
+         Estado de México.</p>
+      <div class="shots">
+        <figure class="shot">
+          <img src="assets/campo1.jpg" alt="Kaax navegando en la presa" loading="lazy">
+          <figcaption>Navegación autónoma sobre agua abierta</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/campo2.jpg" alt="Kaax con la electrónica sellada a bordo" loading="lazy">
+          <figcaption>Electrónica sellada sobre la cubierta</figcaption>
+        </figure>
+      </div>
+      <div class="tests">
+        <div class="test"><div class="v">Flotó</div><div class="k">en todas las pruebas, desplazándose correctamente</div></div>
+        <div class="test"><div class="v">4 kg</div><div class="k">de carga útil manteniendo operación estable</div></div>
+        <div class="test"><div class="v">Sin filtraciones</div><div class="k">componentes sellados, impermeabilización validada</div></div>
+      </div>
     </div>
 
     <div class="grid g2" style="margin-top:clamp(38px,6vw,64px)">
@@ -412,18 +487,60 @@ footer a:hover{color:#fff}
     <p class="lead reveal" style="margin-bottom:30px">Qué cuesta construir un Kaax y de dónde
       sale el dinero.</p>
 
-    <div class="pending reveal" id="fin-pending">
-      <b>Sección en preparación.</b>
-      Las cifras definitivas salen de la presentación de finanzas del equipo. Mientras tanto,
-      abajo está la lista de materiales del prototipo, tomada del repositorio de hardware.
+    <div class="price reveal">
+      <div class="p hi">
+        <h3>Venta</h3>
+        <div class="amt">$25,000<span class="per"> / unidad</span></div>
+        <p>Robot, mecanismo de captación, estación de control y capacitación.</p>
+      </div>
+      <div class="p">
+        <h3>Suscripción</h3>
+        <div class="amt">$800<span class="per"> / mes</span></div>
+        <p>Soporte, refacciones de desgaste y plataforma de datos.</p>
+      </div>
     </div>
 
-    <div class="card reveal" style="margin-top:22px;padding:0;overflow:hidden">
-      <div style="padding:20px 24px 6px">
-        <h3>Lista de materiales · prototipo</h3>
-        <p style="color:var(--muted);font-size:.84rem;margin-top:3px">
-          Costo de una unidad. Precios de referencia en dólares.</p>
+    <div class="card reveal" style="margin-top:20px">
+      <h3>Costo unitario de producción</h3>
+      <p style="color:var(--ink-2);font-size:.9rem;margin-bottom:4px">El costo por unidad
+         cae a menos de la mitad al pasar de una pieza a una serie de cincuenta.</p>
+      <div class="bars" id="bars">
+        <div class="bar"><span class="t">1 unidad</span><span class="track"><i class="fill" data-v="16000"></i></span><span class="v">$16,000</span></div>
+        <div class="bar"><span class="t">10 unidades</span><span class="track"><i class="fill" data-v="9000"></i></span><span class="v">$9,000</span></div>
+        <div class="bar"><span class="t">50 unidades</span><span class="track"><i class="fill" data-v="7000"></i></span><span class="v">$7,000</span></div>
+        <div class="bar"><span class="t">250 unidades</span><span class="track"><i class="fill" data-v="6500"></i></span><span class="v">$6,500</span></div>
       </div>
+      <p class="src">Punto de equilibrio anual estimado en 50 unidades. Cifras en pesos
+         mexicanos.</p>
+    </div>
+
+    <div class="ctx">
+      <article class="card reveal">
+        <div class="ic">◲</div>
+        <h3>$86 millones</h3>
+        <p>Presupuesto de limpieza de <b>un solo municipio</b> en 2026. El mercado no hay que
+           crearlo: ya existe y ya se gasta.</p>
+        <p class="src">Heraldo de México Quintana Roo (2026)</p>
+      </article>
+      <article class="card reveal">
+        <div class="ic">◳</div>
+        <h3>$90,000 · 9 meses</h3>
+        <p>Costo de jornaleros en Tulum durante nueve meses de temporada, haciendo a mano
+           el trabajo que Kaax automatiza.</p>
+      </article>
+      <article class="card reveal">
+        <div class="ic">◴</div>
+        <h3>Público objetivo</h3>
+        <p>Municipios y gobiernos estatales · CONAGUA y SEMARNAT · cooperativas pesqueras ·
+           operadores turísticos de la Riviera Maya, Pátzcuaro y Valle de Bravo.</p>
+      </article>
+    </div>
+
+    <details class="card reveal" style="margin-top:20px">
+      <summary style="cursor:pointer;font-weight:600">Lista de materiales del prototipo</summary>
+      <p style="color:var(--muted);font-size:.84rem;margin:8px 0 14px">
+        Componentes del prototipo actual, precios de referencia en dólares. Es el costo de
+        una unidad hecha a mano, no el costo de producción en serie de arriba.</p>
       <div class="scroller">
         <table class="fin">
           <thead><tr>
@@ -439,10 +556,10 @@ footer a:hover{color:#fff}
             <tr><td>Cámara USB</td><td>Visión por computadora</td><td class="n">1</td><td class="n">$15.99</td><td class="n">$15.99</td></tr>
             <tr><td>Cables de conexión</td><td>Sensores y motores</td><td class="n">1</td><td class="n">$8.59</td><td class="n">$8.59</td></tr>
           </tbody>
-          <tfoot><tr><td colspan="4">Total por unidad</td><td class="n">$675.40</td></tr></tfoot>
+          <tfoot><tr><td colspan="4">Total en materiales</td><td class="n">$675.40 USD</td></tr></tfoot>
         </table>
       </div>
-    </div>
+    </details>
   </div>
 </section>
 
@@ -528,6 +645,18 @@ document.querySelectorAll("section[id]").forEach(s => {
 const io = new IntersectionObserver((es) => es.forEach(e => {
   if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
 }), { rootMargin: "0px 0px -8% 0px", threshold: .08 });
+// Las barras de costo crecen al entrar en pantalla, proporcionales al valor.
+const bars = document.getElementById("bars");
+if (bars) {
+  const max = Math.max(...[...bars.querySelectorAll(".fill")].map(f => +f.dataset.v));
+  new IntersectionObserver((es, ob) => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    bars.querySelectorAll(".fill").forEach((f, i) =>
+      setTimeout(() => { f.style.width = (+f.dataset.v / max * 100) + "%"; }, i * 110));
+    ob.disconnect();
+  }), { threshold: .35 }).observe(bars);
+}
+
 document.querySelectorAll(".reveal").forEach((el, i) => {
   el.style.transitionDelay = (i % 3) * 70 + "ms";
   io.observe(el);

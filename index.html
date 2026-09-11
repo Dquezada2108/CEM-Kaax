@@ -85,17 +85,17 @@ h2{font-size:clamp(1.9rem,4.2vw,2.9rem);font-weight:700;margin-bottom:14px}
    y setSize sin tocar el CSS, el navegador cae al atributo del propio lienzo
    —que setSize acaba de agrandar— y se realimenta: la fila crece, el lienzo
    crece, la fila crece. Sacandolo del flujo el bucle no existe. */
-.hero-stage{position:relative;width:100%;min-height:220px;margin-top:4px}
+.hero-stage{position:relative;width:100%;min-height:240px;margin-top:2px}
 .hero-stage canvas{position:absolute;inset:0;display:block}
-.hero .logo{width:min(320px,60vw);margin:0 auto 20px;animation:rise 1s cubic-bezier(.22,1,.36,1) both}
+.hero .logo{width:min(238px,46vw);margin:0 auto 13px;animation:rise 1s cubic-bezier(.22,1,.36,1) both}
 .hero .logo-fallback{font-size:clamp(3rem,11vw,6rem);font-weight:700;letter-spacing:.06em;
   color:var(--green);margin-bottom:18px;animation:rise 1s cubic-bezier(.22,1,.36,1) both}
 @keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
-.hero .tag{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--teal-600);margin-bottom:18px;animation:rise 1s .1s cubic-bezier(.22,1,.36,1) both}
-.hero h1{font-size:clamp(2rem,5.2vw,3.5rem);font-weight:700;max-width:17ch;margin:0 auto 16px;
+.hero .tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--teal-600);margin-bottom:13px;animation:rise 1s .1s cubic-bezier(.22,1,.36,1) both}
+.hero h1{font-size:clamp(1.95rem,4.8vw,3.25rem);font-weight:700;max-width:17ch;margin:0 auto 13px;
   animation:rise 1s .2s cubic-bezier(.22,1,.36,1) both}
-.hero p{max-width:54ch;margin:0 auto 24px;color:var(--ink-2);font-size:clamp(.96rem,1.5vw,1.08rem);
+.hero p{max-width:50ch;margin:0 auto 19px;color:var(--ink-2);font-size:clamp(.92rem,1.35vw,1.02rem);
   animation:rise 1s .3s cubic-bezier(.22,1,.36,1) both}
 .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;
   animation:rise 1s .4s cubic-bezier(.22,1,.36,1) both}
@@ -287,8 +287,7 @@ footer a:hover{color:#fff}
     <div class="tag">Equipo CEM · PrepaTec Campus Estado de México</div>
     <h1>Robots que limpian el agua de México</h1>
     <p>Una flota de robots acuáticos que recolecta lirio, sargazo y residuos de presas,
-       lagos y costas — pensada para sumarse a los programas de saneamiento que ya
-       existen, no para sustituirlos.</p>
+       lagos y costas, para sumarse a los programas de saneamiento que ya existen.</p>
     <div class="cta">
       <a class="btn primary" href="#prototipo">Ver el prototipo</a>
       <a class="btn ghost" href="#conocenos">Conoce al equipo</a>
@@ -765,7 +764,7 @@ function crearVisor(host, { encuadre = 3.4, fov = 38, dist = 6.2, alto = 1.7 } =
 
 // ---------- portada: gira con el desplazamiento ----------
 const heroHost = document.getElementById("hero-stage");
-const hero = crearVisor(heroHost, { encuadre: 3.9, fov: 34, dist: 6.6, alto: 1.35 });
+const hero = crearVisor(heroHost, { encuadre: 4.6, fov: 34, dist: 6.3, alto: 1.15 });
 hero.camera.lookAt(0, 0, 0);
 
 let heroObjetivo = 0, heroActual = 0;

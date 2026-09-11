@@ -57,6 +57,17 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .nav ul a.active{color:var(--teal-700);background:var(--teal-50)}
 .navtoggle{display:none;font-size:1.5rem;color:var(--ink-2);padding:4px 8px}
 
+.nav-right{display:flex;align-items:center;gap:10px}
+.btn-app{display:inline-flex;align-items:center;gap:6px;padding:8px 17px;border-radius:999px;
+  background:var(--teal-700);color:#fff;font-size:.86rem;font-weight:600;white-space:nowrap;
+  box-shadow:0 3px 12px rgba(0,119,182,.28);
+  transition:background .18s,transform .14s,box-shadow .2s}
+.btn-app:hover{background:var(--teal-900);color:#fff;transform:translateY(-1px);
+  box-shadow:0 7px 20px rgba(0,119,182,.36)}
+.btn-app:active{transform:translateY(0) scale(.98)}
+.btn-app .arw{font-size:.82em;opacity:.8;transition:transform .18s}
+.btn-app:hover .arw{transform:translate(2px,-2px)}
+
 /* ---------- utilidades ---------- */
 section{padding:clamp(64px,9vw,118px) clamp(20px,5vw,40px);position:relative}
 .wrap{max-width:1120px;margin:0 auto}
@@ -279,12 +290,14 @@ footer a:hover{color:#fff}
   .viewer{position:relative;top:0;height:58vh}
 }
 @media (max-width:720px){
+  .nav-right{gap:7px}
   .nav ul{position:fixed;top:var(--nav);left:0;right:0;flex-direction:column;gap:0;
     background:#fff;border-bottom:1px solid var(--line);padding:8px;
     box-shadow:0 14px 30px rgba(10,37,53,.1)}
   .nav ul[hidden]{display:none!important}
   .nav ul a{padding:12px 16px;border-radius:9px}
   .navtoggle{display:block}
+  .btn-app{padding:7px 13px;font-size:.8rem}
 }
 </style>
 </head>
@@ -294,13 +307,19 @@ footer a:hover{color:#fff}
   <a href="#inicio" class="mark">
     <img src="assets/logo_kaax_full.png" alt="Kaax" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'fallback',textContent:'KAAX'}))">
   </a>
-  <button class="navtoggle" id="navtoggle" aria-label="Menú" aria-expanded="false" aria-controls="navlist">☰</button>
-  <ul id="navlist">
-    <li><a href="#conocenos">Conócenos</a></li>
-    <li><a href="#prototipo">Prototipo</a></li>
-    <li><a href="#codigo">Código</a></li>
-    <li><a href="#finanzas">Finanzas</a></li>
-  </ul>
+  <div class="nav-right">
+    <ul id="navlist">
+      <li><a href="#conocenos">Conócenos</a></li>
+      <li><a href="#prototipo">Prototipo</a></li>
+      <li><a href="#codigo">Código</a></li>
+      <li><a href="#finanzas">Finanzas</a></li>
+    </ul>
+    <!-- El unico enlace que sale del sitio: se queda siempre visible, tambien
+         en movil, en vez de esconderse tras el menu. -->
+    <a class="btn-app" href="https://dquezada2108.github.io/kaax_app/"
+       target="_blank" rel="noopener">Abrir la app<span class="arw" aria-hidden="true">↗</span></a>
+    <button class="navtoggle" id="navtoggle" aria-label="Menú" aria-expanded="false" aria-controls="navlist">☰</button>
+  </div>
 </nav>
 
 <!-- ====== PORTADA ====== -->

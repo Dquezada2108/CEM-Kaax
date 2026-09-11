@@ -238,6 +238,30 @@ table.fin tfoot td{font-weight:700;border-bottom:none;border-top:2px solid var(-
 .bar .v{font-family:var(--mono);font-weight:600;font-variant-numeric:tabular-nums}
 .ctx{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:24px}
 
+/* ---------- ritmo de color entre secciones ----------
+   Alternar claro y oscuro evita la monotonía de fondos blancos y hace que las
+   capturas de la app resalten sobre el teal profundo de la marca. */
+.tint-soft{background:linear-gradient(180deg,#fff,var(--teal-50) 40%,var(--teal-50) 60%,#fff)}
+.tint-deep{background:var(--teal-900);color:#cfe9f3}
+.tint-deep h2,.tint-deep h3,.tint-deep b{color:#fff}
+.tint-deep .eyebrow{color:var(--teal-300)}
+.tint-deep .lead,.tint-deep p{color:#b8dced}
+.tint-deep .card{background:rgba(255,255,255,.055);border-color:rgba(255,255,255,.14)}
+.tint-deep .card:hover{border-color:var(--teal-300);background:rgba(255,255,255,.09);
+  box-shadow:0 12px 34px rgba(0,0,0,.22)}
+.tint-deep .card .ic{background:rgba(77,203,224,.16);color:var(--teal-300)}
+.tint-deep .btn.primary{background:var(--teal-500);color:var(--teal-900);
+  box-shadow:0 6px 22px rgba(0,180,216,.3)}
+.tint-deep .btn.primary:hover{background:#fff}
+.nota{margin-top:16px;padding:15px 18px;border-left:3px solid var(--amber);
+  background:#fff8f0;border-radius:0 10px 10px 0;font-size:.9rem;color:var(--ink-2)}
+.shotbig{border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:#fff}
+.tint-deep .shotbig{border-color:rgba(255,255,255,.16);background:rgba(255,255,255,.05)}
+.shotbig img{width:100%;display:block}
+.shotbig figcaption{padding:13px 17px;font-size:.85rem;color:var(--ink-2);background:#fff}
+.tint-deep .shotbig figcaption{background:rgba(255,255,255,.06);color:#b8dced}
+.tint-deep .shotbig figcaption b{color:#fff}
+
 /* ---------- pie ---------- */
 footer{background:var(--teal-900);color:#cfe9f3;padding:clamp(46px,7vw,72px) clamp(20px,5vw,40px) 34px}
 footer a{color:var(--teal-100)}
@@ -298,7 +322,7 @@ footer a:hover{color:#fff}
 </header>
 
 <!-- ====== CONÓCENOS ====== -->
-<section id="conocenos">
+<section id="conocenos" class="tint-soft">
   <div class="wrap">
     <div class="stats reveal">
       <div class="stat"><div class="n">123,400</div><div class="l">toneladas de sargazo en playas</div></div>
@@ -416,9 +440,14 @@ footer a:hover{color:#fff}
           <figcaption>Electrónica sellada sobre la cubierta</figcaption>
         </figure>
       </div>
+      <p class="nota reveal"><b>Sobre los 4 kg:</b> es la <b>capacidad de carga</b> del
+        robot, no lo que recoge en una jornada. Kaax no transporta el material a bordo:
+        lo <b>arrastra</b> hacia la orilla con los rodillos y la red, así que lo recolectado
+        no está limitado por ese peso. Los 4 kg son lo que puede llevar encima —
+        electrónica, baterías e instrumentos— sin perder estabilidad ni flotación.</p>
       <div class="tests">
         <div class="test"><div class="v">Flotó</div><div class="k">en todas las pruebas, desplazándose correctamente</div></div>
-        <div class="test"><div class="v">4 kg</div><div class="k">de carga útil manteniendo operación estable</div></div>
+        <div class="test"><div class="v">4 kg</div><div class="k">de capacidad de carga, con operación estable</div></div>
         <div class="test"><div class="v">Sin filtraciones</div><div class="k">componentes sellados, impermeabilización validada</div></div>
       </div>
     </div>
@@ -454,66 +483,63 @@ footer a:hover{color:#fff}
 </section>
 
 <!-- ====== CÓDIGO ====== -->
-<section id="codigo">
+<section id="codigo" class="tint-deep">
   <div class="wrap">
-    <div class="eyebrow reveal">Abierto</div>
-    <h2 class="reveal">El código</h2>
-    <p class="lead reveal" style="margin-bottom:32px">Todo el proyecto es público: la estación
-      de control, el software de a bordo, el firmware y los archivos de fabricación.</p>
+    <div class="eyebrow reveal">El software</div>
+    <h2 class="reveal">La estación de control</h2>
+    <p class="lead reveal" style="margin-bottom:34px">Kaax no se maneja con un control
+      remoto: se maneja desde una interfaz que además mide. Corre en el navegador, se
+      instala como aplicación y <b>funciona sin internet</b>, porque en el agua no hay
+      señal.</p>
 
-    <div class="grid g2 reveal">
-      <a class="repo" href="https://dquezada2108.github.io/kaax_app/" target="_blank" rel="noopener">
-        <div class="ic">▶</div>
-        <div>
-          <h3>Estación de control</h3>
-          <p>La interfaz real, en vivo. Mapa de la flota, cuadrícula de limpieza, sesiones,
-             reportes y administración del robot. Funciona sin internet.</p>
-          <div class="u">dquezada2108.github.io/kaax_app</div>
-          <div class="tags"><span class="tag">PWA</span><span class="tag">offline</span>
-            <span class="tag">Leaflet</span><span class="tag">Firebase</span></div>
-        </div>
-      </a>
+    <figure class="shotbig reveal">
+      <img src="assets/app-flota.png" alt="Vista de flota: mapa en vivo, control y telemetría" loading="lazy">
+      <figcaption><b>Flota.</b> Posición de cada robot en el mapa, telemetría en vivo,
+        control por teclado o mando, y los rodillos de recolección.</figcaption>
+    </figure>
 
-      <a class="repo" href="https://github.com/Dquezada2108/kaax_app" target="_blank" rel="noopener">
-        <div class="ic">{ }</div>
-        <div>
-          <h3>Software</h3>
-          <p>Código de la estación de control y del servidor que corre en la Raspberry:
-             control por WebSocket, GPS, cámara y telemetría.</p>
-          <div class="u">github.com/Dquezada2108/kaax_app</div>
-          <div class="tags"><span class="tag">Python</span><span class="tag">aiohttp</span>
-            <span class="tag">JavaScript</span></div>
-        </div>
-      </a>
+    <div class="grid g2" style="margin-top:18px">
+      <figure class="shotbig reveal">
+        <img src="assets/app-cuadricula.png" alt="Cuadrícula de limpieza sobre el mapa" loading="lazy">
+        <figcaption><b>Cuadrícula.</b> La zona se divide en cuadrantes y los que el robot
+          recorre se marcan solos con el GPS.</figcaption>
+      </figure>
+      <figure class="shotbig reveal">
+        <img src="assets/app-reportes.png" alt="Reportes con indicadores y gráfica por jornada" loading="lazy">
+        <figcaption><b>Reportes.</b> Kilos por tipo de contaminante, área barrida,
+          distancia y ritmo, jornada por jornada.</figcaption>
+      </figure>
+    </div>
 
-      <a class="repo" href="https://github.com/Dquezada2108/Kaax" target="_blank" rel="noopener">
-        <div class="ic">⚙</div>
-        <div>
-          <h3>Hardware</h3>
-          <p>Modelos CAD, esquemático y archivos de fabricación de la PCB, y la lista de
-             materiales completa.</p>
-          <div class="u">github.com/Dquezada2108/Kaax</div>
-          <div class="tags"><span class="tag">CAD</span><span class="tag">PCB</span>
-            <span class="tag">BOM</span></div>
-        </div>
-      </a>
+    <div class="grid g3 reveal" style="margin-top:26px">
+      <article class="card">
+        <div class="ic">⬇</div>
+        <h3>Sin internet</h3>
+        <p>La aplicación y el mapa se guardan en el dispositivo antes de salir. En el
+          agua todo se registra, y al volver a la red se sincroniza solo.</p>
+      </article>
+      <article class="card">
+        <div class="ic">◷</div>
+        <h3>Mide mientras trabaja</h3>
+        <p>Distancia por GPS, velocidad, área barrida y cuadrantes limpiados salen de la
+          propia jornada. El peso se captura al pesar la carga.</p>
+      </article>
+      <article class="card">
+        <div class="ic">⚑</div>
+        <h3>Cuentas por equipo</h3>
+        <p>Cada operador entra con su cuenta y las jornadas quedan asociadas a él, así el
+          historial de un cuerpo de agua es de todo el equipo.</p>
+      </article>
+    </div>
 
-      <a class="repo" href="https://cad.onshape.com/documents/92e060ab08cc4dd1b0c29db8/w/274b26937e9966ec5a79cd30/e/a2305fc823f01af879af413c" target="_blank" rel="noopener">
-        <div class="ic">◱</div>
-        <div>
-          <h3>Modelo 3D</h3>
-          <p>El ensamble mecánico completo del robot, abierto en Onshape para verlo y
-             medirlo desde el navegador.</p>
-          <div class="u">cad.onshape.com · Full Robot</div>
-          <div class="tags"><span class="tag">Onshape</span><span class="tag">Ensamble</span></div>
-        </div>
-      </a>
+    <div class="cta reveal" style="margin-top:30px;justify-content:flex-start">
+      <a class="btn primary" href="https://dquezada2108.github.io/kaax_app/" target="_blank" rel="noopener">Probar la estación de control</a>
     </div>
   </div>
 </section>
 
 <!-- ====== FINANZAS ====== -->
-<section id="finanzas" style="background:var(--bg-soft)">
+<section id="finanzas" class="tint-soft">
   <div class="wrap">
     <div class="eyebrow reveal">Cuentas claras</div>
     <h2 class="reveal">Finanzas</h2>
@@ -569,30 +595,28 @@ footer a:hover{color:#fff}
       </article>
     </div>
 
-    <details class="card reveal" style="margin-top:20px">
-      <summary style="cursor:pointer;font-weight:600">Lista de materiales del prototipo</summary>
-      <p style="color:var(--muted);font-size:.84rem;margin:8px 0 14px">
-        Componentes del prototipo actual, precios de referencia en dólares. Es el costo de
-        una unidad hecha a mano, no el costo de producción en serie de arriba.</p>
+    <div class="card reveal" style="margin-top:20px;padding:0;overflow:hidden">
+      <div style="padding:22px 24px 8px">
+        <h3>Materiales de un robot</h3>
+        <p style="color:var(--muted);font-size:.85rem;margin-top:3px">
+          Costo de materiales de una unidad, en pesos. Es lo que cuesta construirla a mano:
+          no incluye horas de trabajo ni la reducción por volumen del cuadro de arriba.</p>
+      </div>
       <div class="scroller">
         <table class="fin">
-          <thead><tr>
-            <th>Componente</th><th>Función</th>
-            <th class="n">Cant.</th><th class="n">Unitario</th><th class="n">Total</th>
-          </tr></thead>
+          <thead><tr><th>Partida</th><th>Qué incluye</th><th class="n">MXN</th></tr></thead>
           <tbody>
-            <tr><td>Thruster Apisqueen U5</td><td>Propulsión</td><td class="n">2</td><td class="n">$99.69</td><td class="n">$199.38</td></tr>
-            <tr><td>Raspberry Pi 5 (16 GB)</td><td>Computadora a bordo</td><td class="n">1</td><td class="n">$339.99</td><td class="n">$339.99</td></tr>
-            <tr><td>Batería LiPo 4S Ovonic</td><td>Energía</td><td class="n">2</td><td class="n">$34.99</td><td class="n">$69.98</td></tr>
-            <tr><td>IMU MPU-9250</td><td>Navegación</td><td class="n">1</td><td class="n">$23.49</td><td class="n">$23.49</td></tr>
-            <tr><td>Servos MG995 (4 pzas)</td><td>Rodillos de recolección</td><td class="n">1</td><td class="n">$17.98</td><td class="n">$17.98</td></tr>
-            <tr><td>Cámara USB</td><td>Visión por computadora</td><td class="n">1</td><td class="n">$15.99</td><td class="n">$15.99</td></tr>
-            <tr><td>Cables de conexión</td><td>Sensores y motores</td><td class="n">1</td><td class="n">$8.59</td><td class="n">$8.59</td></tr>
+            <tr><td>Motores y demás</td><td>Thrusters con ESC, baterías LiPo 4S y GPS</td><td class="n">$3,600</td></tr>
+            <tr><td>Raspberry</td><td>Computadora de a bordo</td><td class="n">$5,000</td></tr>
+            <tr><td>Estructura</td><td>Caja estanca, espuma de flotación y herrajes</td><td class="n">$1,800</td></tr>
+            <tr><td>Filamento</td><td>PLA, PETG y ASA para las piezas impresas</td><td class="n">$538</td></tr>
+            <tr><td>Materiales 1</td><td>Consumibles y ferretería</td><td class="n">$200</td></tr>
+            <tr><td>Materiales 2</td><td>Consumibles y ferretería</td><td class="n">$100</td></tr>
           </tbody>
-          <tfoot><tr><td colspan="4">Total en materiales</td><td class="n">$675.40 USD</td></tr></tfoot>
+          <tfoot><tr><td colspan="2">Total en materiales</td><td class="n">$11,238</td></tr></tfoot>
         </table>
       </div>
-    </details>
+    </div>
   </div>
 </section>
 
@@ -616,8 +640,8 @@ footer a:hover{color:#fff}
       <h4>Proyecto</h4>
       <ul>
         <li><a href="https://dquezada2108.github.io/kaax_app/" target="_blank" rel="noopener">Estación de control</a></li>
-        <li><a href="https://github.com/Dquezada2108/kaax_app" target="_blank" rel="noopener">Software</a></li>
-        <li><a href="https://github.com/Dquezada2108/Kaax" target="_blank" rel="noopener">Hardware</a></li>
+        <li>Tech4Good · 28–30 sep 2026</li>
+        <li>Torneo Mexicano de Robótica · 2027</li>
       </ul>
     </div>
     <div>

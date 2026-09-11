@@ -76,13 +76,17 @@ h2{font-size:clamp(1.9rem,4.2vw,2.9rem);font-weight:700;margin-bottom:14px}
 /* ---------- portada ---------- */
 /* Portada al estilo de una página de producto: el texto arriba, el objeto
    grande y centrado ocupando todo lo que sobra. */
-.hero{min-height:100svh;display:grid;grid-template-rows:auto 1fr;text-align:center;
+.hero{min-height:100svh;display:grid;grid-template-rows:auto minmax(0,1fr);text-align:center;
   padding:calc(var(--nav) + 26px) clamp(20px,5vw,40px) 0;
   background:radial-gradient(1200px 620px at 50% -12%,var(--teal-50),#fff 62%);
   overflow:hidden}
 .hero-copy{max-width:1120px;margin:0 auto;width:100%}
-.hero-stage{position:relative;width:100%;min-height:240px;margin-top:8px}
-.hero-stage canvas{display:block;width:100%;height:100%}
+/* El lienzo va absoluto a proposito. Con height:100% dentro de una fila 1fr,
+   y setSize sin tocar el CSS, el navegador cae al atributo del propio lienzo
+   —que setSize acaba de agrandar— y se realimenta: la fila crece, el lienzo
+   crece, la fila crece. Sacandolo del flujo el bucle no existe. */
+.hero-stage{position:relative;width:100%;min-height:220px;margin-top:4px}
+.hero-stage canvas{position:absolute;inset:0;display:block}
 .hero .logo{width:min(320px,60vw);margin:0 auto 20px;animation:rise 1s cubic-bezier(.22,1,.36,1) both}
 .hero .logo-fallback{font-size:clamp(3rem,11vw,6rem);font-weight:700;letter-spacing:.06em;
   color:var(--green);margin-bottom:18px;animation:rise 1s cubic-bezier(.22,1,.36,1) both}
@@ -101,7 +105,7 @@ h2{font-size:clamp(1.9rem,4.2vw,2.9rem);font-weight:700;margin-bottom:14px}
 .btn.primary:hover{background:var(--teal-900);transform:translateY(-2px);box-shadow:0 9px 26px rgba(0,119,182,.32)}
 .btn.ghost{border:1px solid var(--line);color:var(--ink-2);background:#fff}
 .btn.ghost:hover{border-color:var(--teal-300);color:var(--teal-700);transform:translateY(-2px)}
-.scrollhint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
+.scrollhint{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:2;pointer-events:none;
   font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
 .scrollhint::after{content:"";display:block;width:1px;height:26px;margin:9px auto 0;
   background:linear-gradient(var(--teal-300),transparent);animation:drop 1.9s ease-in-out infinite}
@@ -145,7 +149,7 @@ h2{font-size:clamp(1.9rem,4.2vw,2.9rem);font-weight:700;margin-bottom:14px}
   border-radius:var(--r);overflow:hidden;background:
     radial-gradient(70% 60% at 50% 38%,#fff,var(--teal-50));
   border:1px solid var(--line)}
-.viewer canvas{display:block;width:100%;height:100%}
+.viewer canvas{position:absolute;inset:0;display:block}
 .viewer:active{cursor:grabbing}
 .viewer .badge{position:absolute;left:14px;bottom:13px;font-family:var(--mono);font-size:.63rem;
   letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
@@ -746,7 +750,7 @@ function crearVisor(host, { encuadre = 3.4, fov = 38, dist = 6.2, alto = 1.7 } =
   function medir() {
     const r = host.getBoundingClientRect();
     if (!r.width || !r.height) return;
-    renderer.setSize(r.width, r.height, false);
+    renderer.setSize(r.width, r.height);
     camera.aspect = r.width / r.height;
     camera.updateProjectionMatrix();
   }

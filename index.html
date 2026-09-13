@@ -244,7 +244,16 @@ table.fin tfoot td{font-weight:700;border-bottom:none;border-top:2px solid var(-
 .ethic .src{color:var(--teal-300);opacity:.85}
 .shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:16px}
 .shot.video{margin-top:20px}
-.shot.video video{width:100%;display:block;background:#000;aspect-ratio:16/9;object-fit:cover}
+/* Columna, no fila: el <video> y el <figcaption> son ambos hijos del flex, y
+   en fila el pie se iba al costado y el video quedaba descentrado. */
+.shot.video{background:#0b2430;display:flex;flex-direction:column;align-items:center}
+.shot.video video{display:block;background:#0b2430;max-width:100%;
+  max-height:min(70vh,620px);width:auto;height:auto}
+/* Un video de telefono es vertical: forzarlo a 16:9 recortaba casi todo el
+   encuadre. Se respeta su proporcion y se centra sobre fondo oscuro. */
+.shot.video.vertical{padding:0 clamp(8px,4vw,40px)}
+.shot.video figcaption{position:static;background:#0b2430;color:#b8dced;width:100%}
+.shot.video.vertical figcaption{text-align:center}
 .shot{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);
   background:var(--bg-soft)}
 /* Las fotos ya vienen recortadas al robot en assets/, así que aquí solo se
@@ -497,9 +506,11 @@ footer a:hover{color:#fff}
            queda oculta y las fotos ocupan el ancho, sin huecos ni reproductor
            roto. Ver assets/README.md. -->
       <figure class="shot video" id="video-campo" hidden>
+        <!-- El video arranca con un fotograma negro, asi que lleva poster
+             extraido de el mismo. -->
         <video id="campo-video" controls playsinline preload="metadata"
-               poster="assets/campo1.jpg">
-          <source src="assets/campo.mp4" type="video/mp4">
+               poster="assets/campo-poster.jpg">
+          <source src="assets/campo.mp4#t=0.5" type="video/mp4">
         </video>
         <figcaption>Kaax en operación · prueba en presa</figcaption>
       </figure>
@@ -796,7 +807,12 @@ if (bars) {
 const vfig = document.getElementById("video-campo");
 const vid = document.getElementById("campo-video");
 if (vfig && vid) {
-  vid.addEventListener("loadedmetadata", () => { vfig.hidden = false; }, { once: true });
+  vid.addEventListener("loadedmetadata", () => {
+    // La proporcion se decide con el archivo real, no de antemano: asi sirve
+    // igual un clip vertical de telefono que uno horizontal de camara.
+    vfig.classList.toggle("vertical", vid.videoHeight > vid.videoWidth);
+    vfig.hidden = false;
+  }, { once: true });
   vid.addEventListener("error", () => { vfig.remove(); }, { once: true });
   vid.querySelector("source")?.addEventListener("error", () => { vfig.remove(); }, { once: true });
 }

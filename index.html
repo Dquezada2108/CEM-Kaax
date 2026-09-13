@@ -41,11 +41,21 @@ a{color:var(--teal-700);text-decoration:none}
 button{font-family:inherit;cursor:pointer;border:none;background:none}
 
 /* ---------- navegación ---------- */
+/* Sobre la portada oscura la barra va transparente y en blanco; en cuanto se
+   desplaza pasa a la version clara, que es la que combina con el resto. */
 .nav{position:fixed;top:0;left:0;right:0;height:var(--nav);z-index:100;
   display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,4vw,40px);
-  background:rgba(255,255,255,.82);backdrop-filter:blur(14px);
-  border-bottom:1px solid transparent;transition:border-color .3s ease,box-shadow .3s ease}
-.nav.stuck{border-bottom-color:var(--line);box-shadow:0 1px 14px rgba(10,37,53,.05)}
+  background:transparent;border-bottom:1px solid transparent;
+  transition:background .35s ease,border-color .35s ease,box-shadow .35s ease,backdrop-filter .35s}
+.nav.stuck{background:rgba(255,255,255,.84);backdrop-filter:blur(14px);
+  border-bottom-color:var(--line);box-shadow:0 1px 14px rgba(10,37,53,.05)}
+.nav:not(.stuck) .mark{color:#fff}
+.nav:not(.stuck) .mark img{filter:brightness(0) invert(1)}
+.nav:not(.stuck) ul a,.nav:not(.stuck) .menu-btn,.nav:not(.stuck) .navtoggle{color:rgba(255,255,255,.88)}
+.nav:not(.stuck) ul a:hover,.nav:not(.stuck) .menu-btn:hover{color:#fff;background:rgba(255,255,255,.14)}
+.nav:not(.stuck) ul a.active,.nav:not(.stuck) .menu-btn.active{color:#fff;background:rgba(255,255,255,.18)}
+.nav:not(.stuck) .btn-app{background:#fff;color:var(--teal-900)}
+.nav:not(.stuck) .btn-app:hover{background:var(--teal-100)}
 .nav .mark{display:flex;align-items:center;gap:9px;font-weight:700;letter-spacing:.14em;
   font-size:.82rem;color:var(--green)}
 .nav .mark img{height:26px;width:auto}
@@ -85,37 +95,60 @@ h2{font-size:clamp(1.9rem,4.2vw,2.9rem);font-weight:700;margin-bottom:14px}
 }
 
 /* ---------- portada ---------- */
-/* Portada al estilo de una página de producto: el texto arriba, el objeto
-   grande y centrado ocupando todo lo que sobra. */
-.hero{min-height:100svh;display:grid;grid-template-rows:auto minmax(0,1fr);text-align:center;
-  padding:calc(var(--nav) + 14px) clamp(20px,5vw,40px) 0;
-  background:radial-gradient(1200px 620px at 50% -12%,var(--teal-50),#fff 62%);
-  overflow:hidden}
-.hero-copy{max-width:1120px;margin:0 auto;width:100%}
-/* El lienzo va absoluto a proposito. Con height:100% dentro de una fila 1fr,
-   y setSize sin tocar el CSS, el navegador cae al atributo del propio lienzo
-   —que setSize acaba de agrandar— y se realimenta: la fila crece, el lienzo
-   crece, la fila crece. Sacandolo del flujo el bucle no existe. */
-.hero-stage{position:relative;width:100%;min-height:270px;margin-top:4px}
-.hero-stage canvas{position:absolute;inset:0;display:block}
-.hero .logo{width:min(430px,74vw);margin:0 auto 10px;animation:rise 1s cubic-bezier(.22,1,.36,1) both}
-.hero .logo-fallback{font-size:clamp(3rem,11vw,6rem);font-weight:700;letter-spacing:.06em;
-  color:var(--green);margin-bottom:18px;animation:rise 1s cubic-bezier(.22,1,.36,1) both}
+/* Fondo profundo en vez de blanco: el chasis del robot es blanco, asi que
+   sobre oscuro resalta en lugar de desaparecer. */
+.hero{position:relative;min-height:100svh;overflow:hidden;
+  background:
+    radial-gradient(130% 95% at 50% -10%, #0e6480 0%, #054763 38%, #022d40 72%, #011d2b 100%);
+  color:#fff}
+.hero-canvas{position:absolute;inset:0;z-index:0}
+.hero-canvas canvas{position:absolute;inset:0;display:block}
+.hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    linear-gradient(180deg,rgba(1,29,43,.9) 0%,rgba(1,29,43,.72) 26%,rgba(1,29,43,.34) 40%,rgba(1,29,43,0) 56%),
+    linear-gradient(0deg,rgba(1,29,43,.9) 0%,rgba(1,29,43,.5) 16%,rgba(1,29,43,0) 38%)}
+
+.hero-copy{position:relative;z-index:2;min-height:100svh;display:grid;
+  grid-template-rows:auto 1fr auto;align-items:start;text-align:center;
+  padding:calc(var(--nav) + 18px) clamp(20px,5vw,40px) clamp(28px,5vw,52px);
+  max-width:1120px;margin:0 auto}
+.hero-bottom{grid-row:3}
+
+.hero .logo{width:min(360px,64vw);margin:0 auto 14px;
+  /* El logotipo es verde oscuro: sobre fondo profundo se vuelve ilegible, asi
+     que se pasa a blanco puro en vez de pedir otro archivo. */
+  filter:brightness(0) invert(1);
+  animation:rise 1s cubic-bezier(.22,1,.36,1) both}
+.hero .logo-fallback{font-size:clamp(3rem,11vw,5.5rem);font-weight:700;letter-spacing:.06em;
+  color:#fff;margin-bottom:16px;animation:rise 1s cubic-bezier(.22,1,.36,1) both}
 @keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
-.hero .tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--teal-600);margin-bottom:10px;animation:rise 1s .1s cubic-bezier(.22,1,.36,1) both}
-.hero h1{font-size:clamp(1.95rem,4.8vw,3.25rem);font-weight:700;max-width:17ch;margin:0 auto 10px;
-  animation:rise 1s .2s cubic-bezier(.22,1,.36,1) both}
-.hero p{max-width:50ch;margin:0 auto 15px;color:var(--ink-2);font-size:clamp(.92rem,1.35vw,1.02rem);
-  animation:rise 1s .3s cubic-bezier(.22,1,.36,1) both}
+
+.hero h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:700;color:#fff;
+  letter-spacing:-.028em;line-height:1.08;margin:0 auto 11px;
+  text-shadow:0 2px 30px rgba(1,29,43,.5);
+  animation:rise 1s .12s cubic-bezier(.22,1,.36,1) both}
+/* Sin pastilla: a secas, discreto, debajo del titulo. */
+.hero .origen{font-size:clamp(.84rem,1.35vw,1rem);font-weight:500;letter-spacing:.03em;
+  color:#cfe9f3;margin:0;text-shadow:0 1px 18px rgba(1,29,43,.95),0 1px 3px rgba(1,29,43,.8);
+  animation:rise 1s .22s cubic-bezier(.22,1,.36,1) both}
+.hero .lead-hero{max-width:46ch;margin:0 auto 22px;color:#b8dced;
+  font-size:clamp(.94rem,1.4vw,1.06rem);
+  animation:rise 1s .32s cubic-bezier(.22,1,.36,1) both}
 .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;
-  animation:rise 1s .4s cubic-bezier(.22,1,.36,1) both}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:999px;
-  font-weight:600;font-size:.95rem;transition:transform .15s,box-shadow .2s,background .2s}
-.btn.primary{background:var(--teal-700);color:#fff;box-shadow:0 5px 18px rgba(0,119,182,.26)}
-.btn.primary:hover{background:var(--teal-900);transform:translateY(-2px);box-shadow:0 9px 26px rgba(0,119,182,.32)}
-.btn.ghost{border:1px solid var(--line);color:var(--ink-2);background:#fff}
-.btn.ghost:hover{border-color:var(--teal-300);color:var(--teal-700);transform:translateY(-2px)}
+  animation:rise 1s .42s cubic-bezier(.22,1,.36,1) both}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:999px;
+  font-weight:600;font-size:.95rem;transition:transform .15s,box-shadow .2s,background .2s,color .2s}
+.btn.primary{background:#fff;color:var(--teal-900);box-shadow:0 8px 26px rgba(0,0,0,.28)}
+.btn.primary:hover{background:var(--teal-100);transform:translateY(-2px)}
+.btn.ghost{border:1px solid rgba(255,255,255,.34);color:#fff;background:rgba(255,255,255,.06);
+  backdrop-filter:blur(6px)}
+.btn.ghost:hover{border-color:#fff;background:rgba(255,255,255,.14);transform:translateY(-2px)}
+/* Dentro de las secciones claras los botones vuelven al estilo de marca. */
+section .btn.primary{background:var(--teal-700);color:#fff;box-shadow:0 5px 18px rgba(0,119,182,.26)}
+section .btn.primary:hover{background:var(--teal-900)}
+section .btn.ghost{border-color:var(--line);color:var(--ink-2);background:#fff;backdrop-filter:none}
+section .btn.ghost:hover{border-color:var(--teal-300);color:var(--teal-700)}
+
 /* ---------- cifras ---------- */
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;
   border-top:1px solid var(--line);border-bottom:1px solid var(--line);
@@ -323,19 +356,29 @@ footer a:hover{color:#fff}
 
 <!-- ====== PORTADA ====== -->
 <header class="hero" id="inicio">
+  <!-- El lienzo ocupa la portada entera: asi el modelo dispone de todo el alto
+       y no de una franja, que es lo que lo dejaba pequeno. -->
+  <div class="hero-canvas" id="hero-stage"></div>
+  <!-- Velo: oscurece arriba y abajo para que el texto se lea sobre el robot,
+       y deja limpia la franja central, que es donde el robot tiene masa. -->
+  <div class="hero-veil" aria-hidden="true"></div>
+
   <div class="hero-copy">
-    <img class="logo" src="assets/logo_kaax_full.png" alt="Kaax"
-         onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'logo-fallback',textContent:'KAAX'}))">
-    <div class="tag">Equipo CEM · PrepaTec Campus Estado de México</div>
-    <h1>Robots que limpian el agua de México</h1>
-    <p>Una flota de robots acuáticos que recolecta lirio, sargazo y residuos de presas,
-       lagos y costas, para sumarse a los programas de saneamiento que ya existen.</p>
-    <div class="cta">
-      <a class="btn primary" href="#prototipo">Ver el prototipo</a>
-      <a class="btn ghost" href="#conocenos">Conoce al equipo</a>
+    <div class="hero-top">
+      <img class="logo" src="assets/logo_kaax_full.png" alt="Kaax"
+           onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'logo-fallback',textContent:'KAAX'}))">
+      <h1>Robots que limpian<br>el agua de México</h1>
+      <p class="origen">PrepaTec Campus Estado de México</p>
+    </div>
+    <div class="hero-bottom">
+      <p class="lead-hero">Una flota de robots acuáticos que recolecta lirio, sargazo y
+        residuos de presas, lagos y costas.</p>
+      <div class="cta">
+        <a class="btn primary" href="#prototipo">Ver el prototipo</a>
+        <a class="btn ghost" href="#conocenos">Conoce al equipo</a>
+      </div>
     </div>
   </div>
-  <div class="hero-stage" id="hero-stage"></div>
 </header>
 
 <!-- ====== CONÓCENOS ====== -->
@@ -858,7 +901,9 @@ function crearVisor(host, { fov = 38, margen = 1.06, alto = .28 } = {}) {
 const heroHost = document.getElementById("hero-stage");
 // margen 1.10: el modelo de portada tambien sube y baja con el scroll,
 // asi que necesita un poco mas de holgura que el del prototipo.
-const hero = crearVisor(heroHost, { fov: 34, margen: 1.10, alto: .30 });
+// margen 1.04: el lienzo es toda la portada, asi que el modelo puede ir casi
+// a sangre sin riesgo de recorte, porque la esfera lo garantiza.
+const hero = crearVisor(heroHost, { fov: 32, margen: 1.22, alto: .26 });
 
 let heroObjetivo = 0, heroActual = 0;
 function heroProgreso() {
@@ -877,7 +922,8 @@ hero.renderer.setAnimationLoop(() => {
   const t = reduced ? 0 : performance.now() * .00007;
   hero.pivot.rotation.y = -0.6 + heroActual * Math.PI * 1.5 + t;
   hero.pivot.rotation.x = 0.12 + heroActual * 0.38;
-  hero.pivot.position.y = -heroActual * 0.35;
+  // Desplazado hacia abajo: deja despejado el bloque de texto de arriba.
+  hero.pivot.position.y = -0.18 - heroActual * 0.45;
   hero.pivot.scale.setScalar(1 - heroActual * 0.18);
   hero.renderer.render(hero.scene, hero.camera);
 });

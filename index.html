@@ -319,6 +319,40 @@ table.fin tfoot td{font-weight:700;border-bottom:none;border-top:2px solid var(-
 .tint-deep .shotbig figcaption b{color:#fff}
 
 /* ---------- pie ---------- */
+/* ---------- testimonios ---------- */
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(288px,1fr));gap:18px;margin-top:34px}
+.quote{border:1px solid var(--line);border-radius:var(--r);padding:24px 24px 20px;background:#fff;
+  display:flex;flex-direction:column;gap:14px;
+  transition:transform .25s,box-shadow .25s,border-color .25s}
+.quote:hover{transform:translateY(-4px);border-color:var(--teal-100);
+  box-shadow:0 12px 30px rgba(10,37,53,.07)}
+.quote .qm{font-family:Georgia,serif;font-size:2.7rem;line-height:.55;color:var(--teal-300);height:16px}
+/* flex:1 empuja la firma al fondo: con textos de largo distinto las tarjetas
+   quedan desalineadas si la firma sigue al texto. */
+.quote p{color:var(--ink-2);font-size:.96rem;flex:1}
+.quote .who{display:flex;align-items:center;gap:12px;padding-top:13px;border-top:1px solid var(--line-2)}
+.quote .ini{width:38px;height:38px;flex:none;border-radius:50%;background:var(--teal-50);
+  color:var(--teal-700);display:grid;place-items:center;font-weight:700;font-size:.8rem;letter-spacing:.03em}
+.quote .who b{display:block;font-size:.92rem;font-weight:600}
+.quote .who span{display:block;font-size:.82rem;color:var(--muted);line-height:1.35}
+.testi-cta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:32px}
+.testi-cta small{color:var(--muted);font-size:.85rem}
+
+/* ---------- síguenos ---------- */
+/* El verde de la marca apenas aparece en el sitio; esta franja lo usa para
+   cerrar, y entra en degradado al azul oscuro del pie. */
+.follow{background:linear-gradient(135deg,var(--green) 0%,var(--green-dark) 52%,var(--teal-900) 100%);
+  color:#fff;text-align:center}
+.follow h2{color:#fff}
+.follow .eyebrow{color:rgba(255,255,255,.6)}
+.follow p{color:rgba(255,255,255,.86);max-width:50ch;margin:0 auto}
+.ig{display:inline-flex;align-items:center;gap:11px;margin-top:28px;padding:13px 24px 13px 20px;
+  border-radius:999px;background:#fff;color:var(--green-dark);font-weight:600;
+  box-shadow:0 10px 30px rgba(0,0,0,.22);transition:transform .2s,box-shadow .2s}
+.ig:hover{transform:translateY(-2px);box-shadow:0 15px 38px rgba(0,0,0,.3)}
+.ig svg{width:22px;height:22px;flex:none}
+.ig .handle{font-family:var(--mono);font-size:.95rem}
+
 footer{background:var(--teal-900);color:#cfe9f3;padding:clamp(46px,7vw,72px) clamp(20px,5vw,40px) 34px}
 footer a{color:var(--teal-100)}
 footer a:hover{color:#fff}
@@ -712,6 +746,35 @@ footer a:hover{color:#fff}
   </div>
 </section>
 
+<!-- ====== TESTIMONIOS ====== -->
+<!-- Oculta hasta que haya al menos un comentario aprobado o una liga al
+     formulario: mas vale que no exista a que se vea un hueco vacio. -->
+<section id="testimonios" hidden>
+  <div class="wrap">
+    <p class="eyebrow reveal">Lo que dicen</p>
+    <h2 class="reveal">Quienes lo han visto</h2>
+    <p class="lead reveal" style="max-width:56ch;color:var(--ink-2)">Investigadores, docentes y
+      gente de las comunidades donde probamos Kaax.</p>
+    <div class="testi-grid" id="testi-grid" hidden></div>
+    <div class="testi-cta" id="testi-cta" hidden>
+      <a class="btn primary" href="#" target="_blank" rel="noopener">Deja tu comentario</a>
+      <small>Lo leemos antes de publicarlo.</small>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SÍGUENOS ====== -->
+<section class="follow">
+  <div class="wrap">
+    <p class="eyebrow reveal">Síguenos</p>
+    <h2 class="reveal">El proceso, en vivo</h2>
+    <p class="reveal">Pruebas en el agua, piezas que salen de la impresora y las que no
+      salieron bien. Todo va cayendo en nuestro Instagram.</p>
+    <a class="ig reveal" href="https://www.instagram.com/day1robotics/" target="_blank"
+       rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><rect x="2.7" y="2.7" width="18.6" height="18.6" rx="5.4"/><circle cx="12" cy="12" r="4.15"/><circle cx="17.35" cy="6.65" r="1.15" fill="currentColor" stroke="none"/></svg><span class="handle">@day1robotics</span></a>
+  </div>
+</section>
+
 <footer>
   <div class="fgrid">
     <div>
@@ -726,11 +789,13 @@ footer a:hover{color:#fff}
         <li><a href="#prototipo">Prototipo</a></li>
         <li><a href="#codigo">Código</a></li>
         <li><a href="#finanzas">Finanzas</a></li>
+        <li id="fl-testi" hidden><a href="#testimonios">Testimonios</a></li>
       </ul>
     </div>
     <div>
       <h4>Proyecto</h4>
       <ul>
+        <li><a href="https://www.instagram.com/day1robotics/" target="_blank" rel="noopener">Instagram · @day1robotics</a></li>
         <li><a href="https://dquezada2108.github.io/kaax_app/" target="_blank" rel="noopener">Estación de control</a></li>
         <li>Tech4Good · 28–30 sep 2026</li>
         <li>Torneo Mexicano de Robótica · 2027</li>
@@ -820,6 +885,89 @@ if (vfig && vid) {
   vid.addEventListener("error", () => { vfig.remove(); }, { once: true });
   vid.querySelector("source")?.addEventListener("error", () => { vfig.remove(); }, { once: true });
 }
+
+/* ---------- testimonios, desde una hoja de cálculo ---------- */
+/* Flujo: Google Forms → pestaña de respuestas → pestaña "Publicadas", que con
+   un FILTER deja solo las filas con la casilla de aprobación marcada → esa
+   pestaña (SOLO esa) se publica como CSV → esto la lee cada vez que alguien
+   abre el sitio.
+
+   Publicar es publicar: cualquiera con la liga ve ese CSV. Por eso se publica
+   la pestaña derivada y nunca la de respuestas, que trae correos y horas. */
+const TESTIMONIOS_CSV  = "";   // ← pega aquí la liga que te da "Publicar en la web" (output=csv)
+const TESTIMONIOS_FORM = "";   // ← pega aquí la liga del formulario
+
+/* Un split(",") parte el comentario en la primera coma que traiga. Esto
+   respeta comillas y saltos de línea dentro de una celda, que es como Sheets
+   escribe cualquier texto con puntuación. */
+function leerCSV(txt) {
+  const filas = []; let fila = [], celda = "", dentro = false;
+  txt = txt.replace(/\r\n?/g, "\n");
+  for (let i = 0; i < txt.length; i++) {
+    const c = txt[i];
+    if (dentro) {
+      if (c === '"') { if (txt[i + 1] === '"') { celda += '"'; i++; } else dentro = false; }
+      else celda += c;
+    }
+    else if (c === '"') dentro = true;
+    else if (c === ",") { fila.push(celda); celda = ""; }
+    else if (c === "\n") { fila.push(celda); filas.push(fila); fila = []; celda = ""; }
+    else celda += c;
+  }
+  fila.push(celda); filas.push(fila);
+  return filas.filter(f => f.some(c => c.trim() !== ""));
+}
+
+const iniciales = (n) => n.trim().split(/\s+/).filter(Boolean).slice(0, 2)
+  .map(p => p[0]).join("").toUpperCase() || "·";
+
+(async function testimonios() {
+  const sec  = document.getElementById("testimonios");
+  const grid = document.getElementById("testi-grid");
+  const cta  = document.getElementById("testi-cta");
+
+  if (TESTIMONIOS_FORM) {
+    cta.querySelector("a").href = TESTIMONIOS_FORM;
+    cta.hidden = false;
+  }
+
+  if (TESTIMONIOS_CSV) {
+    try {
+      // cb: el navegador guarda el CSV en caché. (Google además lo sirve desde
+      // la suya, que tarda unos minutos en reflejar una casilla recién marcada.)
+      const r = await fetch(TESTIMONIOS_CSV + "&cb=" + Date.now(), { cache: "no-store" });
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      const filas = leerCSV(await r.text());
+      if (filas[0] && /nombre/i.test(filas[0][0] || "")) filas.shift();   // encabezado
+
+      for (const [nombre, cargo, texto] of filas) {
+        if (!texto || !texto.trim()) continue;
+        const q = document.createElement("article");
+        q.className = "quote";
+        q.innerHTML = '<div class="qm" aria-hidden="true">\u201C</div><p></p>' +
+          '<div class="who"><div class="ini"></div><div><b></b><span></span></div></div>';
+        // textContent y no innerHTML: el texto llega de un formulario abierto
+        // a cualquiera, así que se inserta como texto, nunca como marcado.
+        q.querySelector("p").textContent          = texto.trim();
+        q.querySelector(".ini").textContent       = iniciales(nombre || "");
+        q.querySelector(".who b").textContent     = (nombre || "").trim();
+        q.querySelector(".who span").textContent  = (cargo  || "").trim();
+        grid.appendChild(q);
+      }
+      if (grid.children.length) grid.hidden = false;
+    } catch (e) {
+      // Sin red o con la hoja mal publicada la sección simplemente no aparece.
+      console.warn("testimonios:", e.message);
+    }
+  }
+
+  if (!grid.hidden || !cta.hidden) {
+    sec.hidden = false;
+    // El enlace del pie iria a una seccion oculta mientras no haya nada que
+    // mostrar: aparece con ella, no antes.
+    const fl = document.getElementById("fl-testi"); if (fl) fl.hidden = false;
+  }
+})();
 
 document.querySelectorAll(".reveal").forEach((el, i) => {
   el.style.transitionDelay = (i % 3) * 70 + "ms";

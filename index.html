@@ -319,13 +319,43 @@ table.fin tfoot td{font-weight:700;border-bottom:none;border-top:2px solid var(-
 .tint-deep .shotbig figcaption b{color:#fff}
 
 /* ---------- pie ---------- */
+/* ---------- tira de Instagram ---------- */
+.ig-tira{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;
+  padding:14px 24px;background:var(--green);color:#fff;font-size:.95rem;transition:background .25s}
+.ig-tira:hover{background:var(--green-dark)}
+.ig-tira svg{width:19px;height:19px;flex:none}
+.ig-tira b{font-family:var(--mono);font-weight:500}
+.ig-tira .arw{opacity:.75;transition:transform .25s}
+.ig-tira:hover .arw{transform:translate(2px,-2px)}
+/* En pantalla angosta la frase larga partiria la tira en dos renglones. */
+@media (max-width:520px){.ig-tira .txt{display:none}}
+
 /* ---------- testimonios ---------- */
-.testi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(288px,1fr));gap:18px;margin-top:34px}
-.quote{border:1px solid var(--line);border-radius:var(--r);padding:24px 24px 20px;background:#fff;
-  display:flex;flex-direction:column;gap:14px;
-  transition:transform .25s,box-shadow .25s,border-color .25s}
-.quote:hover{transform:translateY(-4px);border-color:var(--teal-100);
-  box-shadow:0 12px 30px rgba(10,37,53,.07)}
+/* Pegados a finanzas: con el relleno normal de seccion quedaban 215 px de
+   blanco entre una cosa y otra, y la seccion se perdia. */
+#finanzas{padding-bottom:clamp(38px,5vw,64px)}
+#testimonios{padding-top:clamp(26px,3.5vw,48px)}
+
+/* A sangre y con los bordes desvanecidos: asi se lee como cinta continua y
+   no como una lista que alguien corto. */
+.testi-cinta{margin:32px 0 0;margin-inline:calc(-1 * clamp(20px,5vw,40px));overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.testi-riel{display:flex;gap:18px;width:max-content;align-items:stretch;
+  animation:cinta var(--dur,40s) linear infinite}
+/* Se detiene al pasar el cursor: si no, es imposible terminar de leer uno. */
+.testi-cinta:hover .testi-riel{animation-play-state:paused}
+.testi-juego{display:flex;gap:18px;align-items:stretch}
+@keyframes cinta{to{transform:translateX(calc(-1 * var(--paso)))}}
+@media (prefers-reduced-motion:reduce){
+  .testi-riel{animation:none}
+  .testi-cinta{overflow-x:auto}
+}
+
+.quote{width:min(330px,78vw);flex:none;border:1px solid var(--line);border-radius:var(--r);
+  padding:24px 24px 20px;background:#fff;display:flex;flex-direction:column;gap:14px;
+  transition:border-color .25s,box-shadow .25s}
+.quote:hover{border-color:var(--teal-100);box-shadow:0 12px 30px rgba(10,37,53,.07)}
 .quote .qm{font-family:Georgia,serif;font-size:2.7rem;line-height:.55;color:var(--teal-300);height:16px}
 /* flex:1 empuja la firma al fondo: con textos de largo distinto las tarjetas
    quedan desalineadas si la firma sigue al texto. */
@@ -337,21 +367,6 @@ table.fin tfoot td{font-weight:700;border-bottom:none;border-top:2px solid var(-
 .quote .who span{display:block;font-size:.82rem;color:var(--muted);line-height:1.35}
 .testi-cta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:32px}
 .testi-cta small{color:var(--muted);font-size:.85rem}
-
-/* ---------- síguenos ---------- */
-/* El verde de la marca apenas aparece en el sitio; esta franja lo usa para
-   cerrar, y entra en degradado al azul oscuro del pie. */
-.follow{background:linear-gradient(135deg,var(--green) 0%,var(--green-dark) 52%,var(--teal-900) 100%);
-  color:#fff;text-align:center}
-.follow h2{color:#fff}
-.follow .eyebrow{color:rgba(255,255,255,.6)}
-.follow p{color:rgba(255,255,255,.86);max-width:50ch;margin:0 auto}
-.ig{display:inline-flex;align-items:center;gap:11px;margin-top:28px;padding:13px 24px 13px 20px;
-  border-radius:999px;background:#fff;color:var(--green-dark);font-weight:600;
-  box-shadow:0 10px 30px rgba(0,0,0,.22);transition:transform .2s,box-shadow .2s}
-.ig:hover{transform:translateY(-2px);box-shadow:0 15px 38px rgba(0,0,0,.3)}
-.ig svg{width:22px;height:22px;flex:none}
-.ig .handle{font-family:var(--mono);font-size:.95rem}
 
 footer{background:var(--teal-900);color:#cfe9f3;padding:clamp(46px,7vw,72px) clamp(20px,5vw,40px) 34px}
 footer a{color:var(--teal-100)}
@@ -427,6 +442,17 @@ footer a:hover{color:#fff}
     </div>
   </div>
 </header>
+
+<!-- ====== SÍGUENOS (tira) ====== -->
+<!-- Va pegada a la portada, no al final: es lo que mas se pide seguir y al
+     final de la pagina casi nadie llega. Tira de una linea, no seccion, para
+     no meter una pantalla entera antes del contenido. -->
+<a class="ig-tira" href="https://www.instagram.com/day1robotics/" target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><rect x="2.7" y="2.7" width="18.6" height="18.6" rx="5.4"/><circle cx="12" cy="12" r="4.15"/><circle cx="17.35" cy="6.65" r="1.15" fill="currentColor" stroke="none"/></svg>
+  <span class="txt">Síguenos el proceso en vivo</span>
+  <b>@day1robotics</b>
+  <span class="arw" aria-hidden="true">↗</span>
+</a>
 
 <!-- ====== CONÓCENOS ====== -->
 <section id="conocenos" class="tint-soft">
@@ -755,23 +781,17 @@ footer a:hover{color:#fff}
     <h2 class="reveal">Quienes lo han visto</h2>
     <p class="lead reveal" style="max-width:56ch;color:var(--ink-2)">Investigadores, docentes y
       gente de las comunidades donde probamos Kaax.</p>
-    <div class="testi-grid" id="testi-grid" hidden></div>
+  </div>
+  <!-- A sangre: las tarjetas entran y salen por los bordes de la pantalla,
+       que es lo que hace que se lea como cinta y no como lista cortada. -->
+  <div class="testi-cinta" id="testi-cinta" hidden>
+    <div class="testi-riel" id="testi-riel"></div>
+  </div>
+  <div class="wrap">
     <div class="testi-cta" id="testi-cta" hidden>
       <a class="btn primary" href="#" target="_blank" rel="noopener">Deja tu comentario</a>
       <small>Lo leemos antes de publicarlo.</small>
     </div>
-  </div>
-</section>
-
-<!-- ====== SÍGUENOS ====== -->
-<section class="follow">
-  <div class="wrap">
-    <p class="eyebrow reveal">Síguenos</p>
-    <h2 class="reveal">El proceso, en vivo</h2>
-    <p class="reveal">Pruebas en el agua, piezas que salen de la impresora y las que no
-      salieron bien. Todo va cayendo en nuestro Instagram.</p>
-    <a class="ig reveal" href="https://www.instagram.com/day1robotics/" target="_blank"
-       rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><rect x="2.7" y="2.7" width="18.6" height="18.6" rx="5.4"/><circle cx="12" cy="12" r="4.15"/><circle cx="17.35" cy="6.65" r="1.15" fill="currentColor" stroke="none"/></svg><span class="handle">@day1robotics</span></a>
   </div>
 </section>
 
@@ -921,10 +941,51 @@ function leerCSV(txt) {
 const iniciales = (n) => n.trim().split(/\s+/).filter(Boolean).slice(0, 2)
   .map(p => p[0]).join("").toUpperCase() || "·";
 
+function tarjeta(nombre, cargo, texto) {
+  const q = document.createElement("article");
+  q.className = "quote";
+  q.innerHTML = '<div class="qm" aria-hidden="true">\u201C</div><p></p>' +
+    '<div class="who"><div class="ini"></div><div><b></b><span></span></div></div>';
+  // textContent y no innerHTML: el texto llega de un formulario abierto
+  // a cualquiera, así que se inserta como texto, nunca como marcado.
+  q.querySelector("p").textContent         = texto.trim();
+  q.querySelector(".ini").textContent      = iniciales(nombre || "");
+  q.querySelector(".who b").textContent    = (nombre || "").trim();
+  q.querySelector(".who span").textContent = (cargo  || "").trim();
+  return q;
+}
+
+/* La cinta gira sin fin repitiendo el mismo juego de tarjetas y recorriendo
+   exactamente el ancho de UN juego: al terminar, la copia siguiente esta
+   justo donde estaba la primera y el salto no se ve.
+   La duracion sale del ancho, no de un numero fijo, para que la velocidad de
+   lectura no cambie cuando haya tres comentarios o treinta. */
+function armarCinta(riel, juego, cinta) {
+  const GAP = 18, VEL = 55;                       // px por segundo
+  const medir = () => {
+    const paso = juego.getBoundingClientRect().width + GAP;
+    riel.style.setProperty("--paso", paso + "px");
+    riel.style.setProperty("--dur", (paso / VEL).toFixed(1) + "s");
+    return paso;
+  };
+  const paso = medir();
+  // Copias suficientes para cubrir la pantalla dos veces (y de sobra al girar
+  // el telefono): con menos, al final del recorrido se abre un hueco.
+  const copias = Math.ceil((Math.max(innerWidth, innerHeight) * 2) / paso);
+  for (let i = 0; i < copias; i++) {
+    const c = juego.cloneNode(true);
+    c.setAttribute("aria-hidden", "true");        // que no se lea repetido
+    riel.appendChild(c);
+  }
+  let t;
+  addEventListener("resize", () => { clearTimeout(t); t = setTimeout(medir, 200); });
+}
+
 (async function testimonios() {
-  const sec  = document.getElementById("testimonios");
-  const grid = document.getElementById("testi-grid");
-  const cta  = document.getElementById("testi-cta");
+  const sec   = document.getElementById("testimonios");
+  const cinta = document.getElementById("testi-cinta");
+  const riel  = document.getElementById("testi-riel");
+  const cta   = document.getElementById("testi-cta");
 
   if (TESTIMONIOS_FORM) {
     cta.querySelector("a").href = TESTIMONIOS_FORM;
@@ -940,28 +1001,28 @@ const iniciales = (n) => n.trim().split(/\s+/).filter(Boolean).slice(0, 2)
       const filas = leerCSV(await r.text());
       if (filas[0] && /nombre/i.test(filas[0][0] || "")) filas.shift();   // encabezado
 
+      const juego = document.createElement("div");
+      juego.className = "testi-juego";
       for (const [nombre, cargo, texto] of filas) {
         if (!texto || !texto.trim()) continue;
-        const q = document.createElement("article");
-        q.className = "quote";
-        q.innerHTML = '<div class="qm" aria-hidden="true">\u201C</div><p></p>' +
-          '<div class="who"><div class="ini"></div><div><b></b><span></span></div></div>';
-        // textContent y no innerHTML: el texto llega de un formulario abierto
-        // a cualquiera, así que se inserta como texto, nunca como marcado.
-        q.querySelector("p").textContent          = texto.trim();
-        q.querySelector(".ini").textContent       = iniciales(nombre || "");
-        q.querySelector(".who b").textContent     = (nombre || "").trim();
-        q.querySelector(".who span").textContent  = (cargo  || "").trim();
-        grid.appendChild(q);
+        juego.appendChild(tarjeta(nombre, cargo, texto));
       }
-      if (grid.children.length) grid.hidden = false;
+
+      if (juego.children.length) {
+        riel.appendChild(juego);
+        // Hay que descubrir la seccion ANTES de medir: dentro de un elemento
+        // con display:none todo mide cero y la cinta saldria rota.
+        sec.hidden = false;
+        cinta.hidden = false;
+        armarCinta(riel, juego, cinta);
+      }
     } catch (e) {
       // Sin red o con la hoja mal publicada la sección simplemente no aparece.
       console.warn("testimonios:", e.message);
     }
   }
 
-  if (!grid.hidden || !cta.hidden) {
+  if (!cinta.hidden || !cta.hidden) {
     sec.hidden = false;
     // El enlace del pie iria a una seccion oculta mientras no haya nada que
     // mostrar: aparece con ella, no antes.

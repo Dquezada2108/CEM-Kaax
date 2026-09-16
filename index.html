@@ -72,6 +72,16 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .navtoggle{display:none;font-size:1.5rem;color:var(--ink-2);padding:4px 8px}
 
 .nav-right{display:flex;align-items:center;gap:10px}
+.btn-ig{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:999px;
+  color:#fff;font-size:.86rem;font-weight:600;white-space:nowrap;
+  background:radial-gradient(circle at 28% 108%,#fdf497 0%,#fdf497 5%,#fd5949 45%,#d6249f 62%,#285aeb 92%);
+  box-shadow:0 3px 12px rgba(214,36,159,.3);
+  transition:transform .14s,box-shadow .2s,filter .18s}
+.btn-ig:hover{transform:translateY(-1px);filter:saturate(1.15) brightness(1.07);
+  box-shadow:0 7px 20px rgba(214,36,159,.44)}
+.btn-ig:active{transform:translateY(0) scale(.98)}
+.btn-ig svg{width:16px;height:16px;flex:none}
+
 .btn-app{display:inline-flex;align-items:center;gap:6px;padding:8px 17px;border-radius:999px;
   background:var(--teal-700);color:#fff;font-size:.86rem;font-weight:600;white-space:nowrap;
   box-shadow:0 3px 12px rgba(0,119,182,.28);
@@ -320,15 +330,26 @@ table.fin tfoot td{font-weight:700;border-bottom:none;border-top:2px solid var(-
 
 /* ---------- pie ---------- */
 /* ---------- tira de Instagram ---------- */
-.ig-tira{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;
-  padding:14px 24px;background:var(--green);color:#fff;font-size:.95rem;transition:background .25s}
-.ig-tira:hover{background:var(--green-dark)}
-.ig-tira svg{width:19px;height:19px;flex:none}
-.ig-tira b{font-family:var(--mono);font-weight:500}
-.ig-tira .arw{opacity:.75;transition:transform .25s}
-.ig-tira:hover .arw{transform:translate(2px,-2px)}
+/* El degradado se mueve despacio de lado a lado: es lo que hace que la tira
+   se note sin subirle el tamano ni gritar. */
+.ig-tira{position:relative;display:flex;align-items:center;justify-content:center;gap:13px;
+  flex-wrap:wrap;padding:15px 24px;color:#fff;font-size:.97rem;overflow:hidden;
+  background:linear-gradient(100deg,var(--green-dark),var(--green) 32%,#12806c 58%,var(--green-dark));
+  background-size:220% 100%;animation:tiraluz 16s ease-in-out infinite;
+  transition:filter .25s}
+.ig-tira:hover{filter:brightness(1.12)}
+@keyframes tiraluz{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+/* El glifo lleva el degradado real de Instagram: es lo unico que se reconoce
+   al instante, y da color sin repintar el resto del sitio. */
+.ig-tira .glifo{width:30px;height:30px;border-radius:9px;flex:none;display:grid;place-items:center;
+  background:radial-gradient(circle at 28% 108%,#fdf497 0%,#fdf497 5%,#fd5949 45%,#d6249f 62%,#285aeb 92%);box-shadow:0 2px 10px rgba(0,0,0,.28)}
+.ig-tira .glifo svg{width:18px;height:18px}
+.ig-tira b{font-family:var(--mono);font-weight:500;letter-spacing:-.01em}
+.ig-tira .arw{opacity:.8;transition:transform .25s}
+.ig-tira:hover .arw{transform:translate(3px,-3px)}
 /* En pantalla angosta la frase larga partiria la tira en dos renglones. */
-@media (max-width:520px){.ig-tira .txt{display:none}}
+@media (max-width:560px){.ig-tira .txt{display:none}}
+@media (prefers-reduced-motion:reduce){.ig-tira{animation:none}}
 
 /* ---------- testimonios ---------- */
 /* Pegados a finanzas: con el relleno normal de seccion quedaban 215 px de
@@ -341,11 +362,11 @@ table.fin tfoot td{font-weight:700;border-bottom:none;border-top:2px solid var(-
 .testi-cinta{margin:32px 0 0;margin-inline:calc(-1 * clamp(20px,5vw,40px));overflow:hidden;
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
   mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
-.testi-riel{display:flex;gap:18px;width:max-content;align-items:stretch;
+.testi-riel{display:flex;gap:28px;width:max-content;align-items:stretch;
   animation:cinta var(--dur,40s) linear infinite}
 /* Se detiene al pasar el cursor: si no, es imposible terminar de leer uno. */
 .testi-cinta:hover .testi-riel{animation-play-state:paused}
-.testi-juego{display:flex;gap:18px;align-items:stretch}
+.testi-juego{display:flex;gap:28px;align-items:stretch}
 @keyframes cinta{to{transform:translateX(calc(-1 * var(--paso)))}}
 @media (prefers-reduced-motion:reduce){
   .testi-riel{animation:none}
@@ -392,6 +413,8 @@ footer a:hover{color:#fff}
   .nav ul a{padding:12px 16px;border-radius:9px}
   .navtoggle{display:block}
   .btn-app{padding:7px 13px;font-size:.8rem}
+  .btn-ig{padding:7px 10px}
+  .btn-ig span{display:none}
 }
 </style>
 </head>
@@ -410,6 +433,8 @@ footer a:hover{color:#fff}
     </ul>
     <!-- El unico enlace que sale del sitio: se queda siempre visible, tambien
          en movil, en vez de esconderse tras el menu. -->
+    <a class="btn-ig" href="https://www.instagram.com/day1robotics/" target="_blank"
+       rel="noopener" aria-label="Instagram de Day1 Robotics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2.7" y="2.7" width="18.6" height="18.6" rx="5.4"/><circle cx="12" cy="12" r="4.15"/><circle cx="17.35" cy="6.65" r="1.15" fill="currentColor" stroke="none"/></svg><span>Instagram</span></a>
     <a class="btn-app" href="https://dquezada2108.github.io/kaax_app/"
        target="_blank" rel="noopener">Abrir la app<span class="arw" aria-hidden="true">↗</span></a>
     <button class="navtoggle" id="navtoggle" aria-label="Menú" aria-expanded="false" aria-controls="navlist">☰</button>
@@ -448,7 +473,7 @@ footer a:hover{color:#fff}
      final de la pagina casi nadie llega. Tira de una linea, no seccion, para
      no meter una pantalla entera antes del contenido. -->
 <a class="ig-tira" href="https://www.instagram.com/day1robotics/" target="_blank" rel="noopener">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><rect x="2.7" y="2.7" width="18.6" height="18.6" rx="5.4"/><circle cx="12" cy="12" r="4.15"/><circle cx="17.35" cy="6.65" r="1.15" fill="currentColor" stroke="none"/></svg>
+  <span class="glifo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2.7" y="2.7" width="18.6" height="18.6" rx="5.4"/><circle cx="12" cy="12" r="4.15"/><circle cx="17.35" cy="6.65" r="1.15" fill="currentColor" stroke="none"/></svg></span>
   <span class="txt">Síguenos el proceso en vivo</span>
   <b>@day1robotics</b>
   <span class="arw" aria-hidden="true">↗</span>
@@ -961,7 +986,10 @@ function tarjeta(nombre, cargo, texto) {
    La duracion sale del ancho, no de un numero fijo, para que la velocidad de
    lectura no cambie cuando haya tres comentarios o treinta. */
 function armarCinta(riel, juego, cinta) {
-  const GAP = 18, VEL = 55;                       // px por segundo
+  const VEL = 55;                                 // px por segundo
+  // El hueco sale del CSS: repetirlo aqui es un numero que algun dia deja
+  // de coincidir, y entonces la cinta da un salto en cada vuelta.
+  const GAP = parseFloat(getComputedStyle(riel).gap) || 0;
   const medir = () => {
     const paso = juego.getBoundingClientRect().width + GAP;
     riel.style.setProperty("--paso", paso + "px");

@@ -53,11 +53,14 @@ def version(rel):
 def frag(n):
     return (RAIZ / "partials" / f"{n}.html").read_text().rstrip()
 
-def nav(actual):
+def nav(actual, conPortada):
     li = "".join(
         f'\n      <li><a href="{h}"{" class=\"active\" aria-current=\"page\"" if h == actual else ""}>{t}</a></li>'
         for h, t in MENU)
-    return f'''<nav class="nav" id="nav">
+    # Sin portada oscura detras, la barra tiene que nacer ya en su version
+    # clara: en modo transparente el texto es blanco y sobre fondo blanco
+    # desaparece. Se marca aqui y no solo en JS para que no parpadee.
+    return f'''<nav class="nav{"" if conPortada else " stuck"}" id="nav">
   <a href="index.html" class="mark" aria-label="{SITIO}">
     <img src="assets/day1_logo.png" alt="{SITIO}"
          onerror="this.replaceWith(Object.assign(document.createElement('span'),{{className:'fallback',textContent:'DAY1'}}))">
@@ -146,7 +149,7 @@ def pagina(archivo, titulo, desc, partes, tres):
 </head>
 <body>
 
-{nav(archivo)}
+{nav(archivo, 'inicio' in partes)}
 
 {cuerpo}
 

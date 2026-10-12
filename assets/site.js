@@ -36,7 +36,12 @@ navlist.addEventListener("click", (e) => {
 mq.addEventListener("change", () => { navtoggle.setAttribute("aria-expanded", "false"); syncNavList(); });
 syncNavList();
 
-addEventListener("scroll", () => nav.classList.toggle("stuck", scrollY > 8), { passive: true });
+// La version transparente solo tiene sentido si detras hay una portada
+// oscura. En las demas paginas la barra se queda clara siempre.
+const conPortada = !!document.getElementById("inicio");
+const fijarNav = () => nav.classList.toggle("stuck", !conPortada || scrollY > 8);
+addEventListener("scroll", fijarNav, { passive: true });
+fijarNav();
 
 // Resalta la sección visible. rootMargin recorta la franja de decisión a una
 // banda estrecha del centro, si no varias secciones "activas" a la vez.
@@ -270,7 +275,36 @@ if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
   }
 }
 
-document.querySelectorAll(".reveal").forEach((el, i) => {
-  el.style.transitionDelay = (i % 3) * 70 + "ms";
-  io.observe(el);
-});
+/* Una rejilla que aparece de golpe se siente plana. Se le quita el reveal al
+   contenedor y se le pone a cada hijo con un retraso creciente: la seccion se
+   arma en cascada en vez de encenderse como un bloque. */
+for (const caja of document.querySelectorAll(".grid,.servicios,.variantes,.contacto,.stats,.shots")) {
+  caja.classList.remove("reveal");
+  [...caja.children].forEach((h, i) => {
+    h.classList.add("reveal");
+    h.style.setProperty("--d", Math.min(i * 85, 420) + "ms");
+  });
+}
+document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+/* Desplazamiento suave de las fotos: se mueven algo menos que la pagina, que
+   es lo que da profundidad. Se calcula en un solo rAF para no disparar un
+   reflow por cada evento de scroll. */
+if (!matchMedia("(prefers-reduced-motion:reduce)").matches) {
+  const capas = [...document.querySelectorAll(".shot img,.shotbig img")];
+  capas.forEach(i => { i.classList.add("parallax"); i.style.transform = "scale(1.12)"; });
+  let pendiente = false;
+  const mover = () => {
+    pendiente = false;
+    for (const i of capas) {
+      const r = i.getBoundingClientRect();
+      if (r.bottom < -200 || r.top > innerHeight + 200) continue;
+      const centro = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
+      i.style.transform = `translate3d(0,${(-centro * 26).toFixed(1)}px,0) scale(1.12)`;
+    }
+  };
+  addEventListener("scroll", () => {
+    if (!pendiente) { pendiente = true; requestAnimationFrame(mover); }
+  }, { passive: true });
+  mover();
+}

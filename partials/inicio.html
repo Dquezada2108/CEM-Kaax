@@ -1,0 +1,25 @@
+<header class="hero" id="inicio">
+  <!-- El lienzo ocupa la portada entera: asi el modelo dispone de todo el alto
+       y no de una franja, que es lo que lo dejaba pequeno. -->
+  <div class="hero-canvas" id="hero-stage"></div>
+  <!-- Velo: oscurece arriba y abajo para que el texto se lea sobre el robot,
+       y deja limpia la franja central, que es donde el robot tiene masa. -->
+  <div class="hero-veil" aria-hidden="true"></div>
+
+  <div class="hero-copy">
+    <div class="hero-top">
+      <img class="logo" src="assets/day1_logo.png" alt="DAY1 Robotics"
+           onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'logo-fallback',textContent:'DAY1'}))">
+      <h1>Robots que limpian<br>el agua de México</h1>
+      <p class="origen">Startup mexicana de robótica</p>
+    </div>
+    <div class="hero-bottom">
+      <p class="lead-hero">Diseñamos robots acuáticos y prestamos servicios de limpieza y
+        consultoría para presas, lagos y costas.</p>
+      <div class="cta">
+        <a class="btn primary" href="productos.html">Ver lo que hacemos</a>
+        <a class="btn ghost" href="contacto.html">Hablemos</a>
+      </div>
+    </div>
+  </div>
+</header>

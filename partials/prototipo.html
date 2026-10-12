@@ -1,0 +1,95 @@
+<section id="prototipo" class="proto">
+  <div class="wrap">
+    <div class="eyebrow reveal">La tecnología</div>
+    <h2 class="reveal">El prototipo</h2>
+    <p class="lead reveal" style="margin-bottom:36px">Un catamarán autónomo con GPS, propulsión
+      dual y rodillos que empujan el material hacia adentro. A bordo lleva una Raspberry Pi 5
+      que crea su propia red WiFi, así que funciona sin señal en el agua.</p>
+
+    <div class="stage">
+      <div class="viewer" id="viewer">
+        <div class="loading" id="viewer-loading">cargando modelo…</div>
+        <div class="badge">Chasis · Base V3 — arrástralo para girarlo</div>
+      </div>
+
+      <dl class="specs reveal">
+        <div class="spec"><dt>Computadora a bordo</dt><dd>Raspberry Pi 5</dd></div>
+        <div class="spec"><dt>Enlace</dt><dd>WiFi · hotspot propio</dd></div>
+        <div class="spec"><dt>Navegación</dt><dd>GPS NEO-6M · NMEA</dd></div>
+        <div class="spec"><dt>Propulsión</dt><dd>2 × thruster con ESC</dd></div>
+        <div class="spec"><dt>Recolección</dt><dd>2 × servo 360° (rodillos)</dd></div>
+        <div class="spec"><dt>Energía</dt><dd>2 × LiPo 4S</dd></div>
+        <div class="spec"><dt>Visión</dt><dd>Cámara + Teachable Machine</dd></div>
+        <div class="spec"><dt>Seguridad</dt><dd>Failsafe a 1.5 s sin enlace</dd></div>
+        <div class="spec"><dt>Control</dt><dd>Teleoperado <span class="wip">autónomo en desarrollo</span></dd></div>
+      </dl>
+    </div>
+
+    <div class="reveal" style="margin-top:clamp(38px,6vw,64px)">
+      <h3 style="font-size:1.25rem;margin-bottom:4px">Funcionamiento en campo</h3>
+      <p style="color:var(--ink-2);font-size:.94rem">Pruebas del prototipo en presa,
+         México.</p>
+      <!-- El video se muestra solo si el archivo existe; si no, esta figura se
+           queda oculta y las fotos ocupan el ancho, sin huecos ni reproductor
+           roto. Ver assets/README.md. -->
+      <figure class="shot video" id="video-campo" hidden>
+        <!-- El video arranca con un fotograma negro, asi que lleva poster
+             extraido de el mismo. -->
+        <video id="campo-video" controls playsinline preload="metadata"
+               poster="assets/campo-poster.jpg">
+          <source src="assets/campo.mp4#t=0.5" type="video/mp4">
+        </video>
+        <figcaption>Kaax en operación · prueba en presa</figcaption>
+      </figure>
+
+      <div class="shots">
+        <figure class="shot">
+          <img src="assets/campo1.jpg" alt="Kaax navegando en la presa" loading="lazy">
+          <figcaption>Navegación autónoma sobre agua abierta</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/campo2.jpg" alt="Kaax con la electrónica sellada a bordo" loading="lazy">
+          <figcaption>Electrónica sellada sobre la cubierta</figcaption>
+        </figure>
+      </div>
+      <p class="nota reveal"><b>Sobre los 4 kg:</b> es la <b>capacidad de carga</b> del
+        robot, no lo que recoge en una jornada. Kaax no transporta el material a bordo:
+        lo <b>arrastra</b> hacia la orilla con los rodillos y la red, así que lo recolectado
+        no está limitado por ese peso. Los 4 kg son lo que puede llevar encima —
+        electrónica, baterías e instrumentos— sin perder estabilidad ni flotación.</p>
+      <div class="tests">
+        <div class="test"><div class="v">Flotó</div><div class="k">en todas las pruebas, desplazándose correctamente</div></div>
+        <div class="test"><div class="v">4 kg</div><div class="k">de capacidad de carga, con operación estable</div></div>
+        <div class="test"><div class="v">Sin filtraciones</div><div class="k">componentes sellados, impermeabilización validada</div></div>
+      </div>
+    </div>
+
+    <div class="grid g2" style="margin-top:clamp(38px,6vw,64px)">
+      <article class="card reveal">
+        <div class="ic">⬡</div>
+        <h3>Autonomía en el agua</h3>
+        <p>Si el robot deja de recibir órdenes por más de 1.5 segundos, los motores y los
+          rodillos se detienen solos. Un rodillo girando sin enlace no se para por sí mismo,
+          y esa es justo la situación que el sistema tiene que cubrir.</p>
+      </article>
+      <article class="card reveal">
+        <div class="ic">◐</div>
+        <h3>Autonomía: lo que hay y lo que falta</h3>
+        <p>Hoy Kaax se <b>teleopera</b>: un operador lo conduce desde la estación de control
+          y el robot registra su recorrido por GPS. El <b>modo autónomo está planeado y
+          sigue en desarrollo</b> — la detección de sargazo por color y las rutas
+          predictivas ya están diseñadas, pero todavía no operan solas en el agua.</p>
+        <p style="margin-top:12px">Cuando llegue, será autonomía acotada y siempre bajo
+          supervisión humana. Ante la duda, no captar: un falso positivo tiene consecuencia
+          física sobre fauna viva.</p>
+      </article>
+      <article class="card reveal">
+        <div class="ic">▦</div>
+        <h3>Medición, no estimación</h3>
+        <p>Cada jornada registra distancia recorrida por GPS, velocidad media, área barrida
+          y cuadrantes limpiados. El peso recolectado se captura a mano al pesar la carga,
+          porque inventarlo haría inútil el resto.</p>
+      </article>
+    </div>
+  </div>
+</section>

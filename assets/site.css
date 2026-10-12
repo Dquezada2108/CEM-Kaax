@@ -1,0 +1,490 @@
+:root{
+  /* Misma familia que la app Kaax, para que el sitio y la interfaz se lean
+     como una sola cosa. El verde viene del logotipo completo. */
+  --teal-50:#e6f7fb; --teal-100:#b8e7f0; --teal-300:#4dcbe0; --teal-500:#00b4d8;
+  --teal-600:#0096b5; --teal-700:#0077b6; --teal-900:#023e58;
+  --green:#15675a; --green-dark:#0e4a41;
+  --day1:#255764; --day1-dark:#173d47;   /* el teal del logotipo DAY1 */
+  --ink:#0a2535; --ink-2:#2a4858; --muted:#6b8a9c;
+  --line:#dde9ef; --line-2:#eef5f8; --bg:#fff; --bg-soft:#f7fbfd;
+  --amber:#f4a261;
+  --r:14px;
+  --ff:'Space Grotesk',system-ui,-apple-system,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --nav:62px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:var(--nav)}
+body{font-family:var(--ff);color:var(--ink);background:var(--bg);line-height:1.55;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:var(--teal-700);text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+
+/* Barra de avance de lectura: ocupa el borde superior, sobre la navegacion. */
+.progreso{position:fixed;top:0;left:0;right:0;height:2px;z-index:200;transform-origin:0 50%;
+  transform:scaleX(0);background:linear-gradient(90deg,var(--teal-500),var(--day1));
+  will-change:transform}
+@media (prefers-reduced-motion:reduce){.progreso{display:none}}
+
+/* ---------- navegación ---------- */
+/* Sobre la portada oscura la barra va transparente y en blanco; en cuanto se
+   desplaza pasa a la version clara, que es la que combina con el resto. */
+.nav{position:fixed;top:0;left:0;right:0;height:var(--nav);z-index:100;
+  display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,4vw,40px);
+  background:transparent;border-bottom:1px solid transparent;
+  transition:background .35s ease,border-color .35s ease,box-shadow .35s ease,backdrop-filter .35s}
+.nav.stuck{background:rgba(255,255,255,.84);backdrop-filter:blur(14px);
+  border-bottom-color:var(--line);box-shadow:0 1px 14px rgba(10,37,53,.05)}
+.nav:not(.stuck) .mark{color:#fff}
+.nav:not(.stuck) .mark img{filter:brightness(0) invert(1)}
+.nav:not(.stuck) ul a,.nav:not(.stuck) .menu-btn,.nav:not(.stuck) .navtoggle{color:rgba(255,255,255,.88)}
+.nav:not(.stuck) ul a:hover,.nav:not(.stuck) .menu-btn:hover{color:#fff;background:rgba(255,255,255,.14)}
+.nav:not(.stuck) ul a.active,.nav:not(.stuck) .menu-btn.active{color:#fff;background:rgba(255,255,255,.18)}
+.nav:not(.stuck) .btn-app{background:#fff;color:var(--teal-900)}
+.nav:not(.stuck) .btn-app:hover{background:var(--teal-100)}
+.nav .mark{display:flex;align-items:center;gap:9px;font-weight:700;letter-spacing:.14em;
+  font-size:.82rem;color:var(--green)}
+.nav .mark img{height:26px;width:auto}
+.nav .mark .fallback{font-size:1rem}
+.nav ul{display:flex;gap:2px;list-style:none}
+.nav ul a{position:relative;display:block;padding:8px 14px;border-radius:999px;
+  font-size:.88rem;font-weight:500;color:var(--ink-2);transition:color .18s,background .18s}
+.nav ul a:hover{color:var(--teal-700);background:var(--bg-soft)}
+.nav ul a.active{color:var(--teal-700);background:var(--teal-50)}
+.navtoggle{display:none;font-size:1.5rem;color:var(--ink-2);padding:4px 8px}
+
+.nav-right{display:flex;align-items:center;gap:10px}
+.btn-ig{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:999px;
+  color:#fff;font-size:.86rem;font-weight:600;white-space:nowrap;
+  background:radial-gradient(circle at 28% 108%,#fdf497 0%,#fdf497 5%,#fd5949 45%,#d6249f 62%,#285aeb 92%);
+  box-shadow:0 3px 12px rgba(214,36,159,.3);
+  transition:transform .14s,box-shadow .2s,filter .18s}
+.btn-ig:hover{transform:translateY(-1px);filter:saturate(1.15) brightness(1.07);
+  box-shadow:0 7px 20px rgba(214,36,159,.44)}
+.btn-ig:active{transform:translateY(0) scale(.98)}
+.btn-ig svg{width:16px;height:16px;flex:none}
+
+.btn-app{display:inline-flex;align-items:center;gap:6px;padding:8px 17px;border-radius:999px;
+  background:var(--teal-700);color:#fff;font-size:.86rem;font-weight:600;white-space:nowrap;
+  box-shadow:0 3px 12px rgba(0,119,182,.28);
+  transition:background .18s,transform .14s,box-shadow .2s}
+.btn-app:hover{background:var(--teal-900);color:#fff;transform:translateY(-1px);
+  box-shadow:0 7px 20px rgba(0,119,182,.36)}
+.btn-app:active{transform:translateY(0) scale(.98)}
+.btn-app .arw{font-size:.82em;opacity:.8;transition:transform .18s}
+.btn-app:hover .arw{transform:translate(2px,-2px)}
+
+/* ---------- utilidades ---------- */
+section{padding:clamp(64px,9vw,118px) clamp(20px,5vw,40px);position:relative}
+.wrap{max-width:1120px;margin:0 auto}
+.eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--teal-600);margin-bottom:12px;font-weight:500}
+h1,h2,h3{line-height:1.12;letter-spacing:-.02em}
+h2{font-size:clamp(1.9rem,4.2vw,2.9rem);font-weight:700;margin-bottom:14px}
+.lead{font-size:clamp(1rem,1.6vw,1.14rem);color:var(--ink-2);max-width:62ch}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;transition:none}
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+
+/* ---------- portada ---------- */
+/* Fondo profundo en vez de blanco: el chasis del robot es blanco, asi que
+   sobre oscuro resalta en lugar de desaparecer. */
+.hero{position:relative;min-height:100svh;overflow:hidden;
+  background:
+    radial-gradient(130% 95% at 50% -10%, #0e6480 0%, #054763 38%, #022d40 72%, #011d2b 100%);
+  color:#fff}
+.hero-canvas{position:absolute;inset:0;z-index:0}
+.hero-canvas canvas{position:absolute;inset:0;display:block}
+.hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    linear-gradient(180deg,rgba(1,29,43,.9) 0%,rgba(1,29,43,.72) 26%,rgba(1,29,43,.34) 40%,rgba(1,29,43,0) 56%),
+    linear-gradient(0deg,rgba(1,29,43,.9) 0%,rgba(1,29,43,.5) 16%,rgba(1,29,43,0) 38%)}
+
+.hero-copy{position:relative;z-index:2;min-height:100svh;display:grid;
+  grid-template-rows:auto 1fr auto;align-items:start;text-align:center;
+  padding:calc(var(--nav) + 18px) clamp(20px,5vw,40px) clamp(28px,5vw,52px);
+  max-width:1120px;margin:0 auto}
+.hero-bottom{grid-row:3}
+
+.hero .logo{width:min(360px,64vw);margin:0 auto 14px;
+  /* El logotipo es verde oscuro: sobre fondo profundo se vuelve ilegible, asi
+     que se pasa a blanco puro en vez de pedir otro archivo. */
+  filter:brightness(0) invert(1);
+  animation:rise 1s cubic-bezier(.22,1,.36,1) both}
+.hero .logo-fallback{font-size:clamp(3rem,11vw,5.5rem);font-weight:700;letter-spacing:.06em;
+  color:#fff;margin-bottom:16px;animation:rise 1s cubic-bezier(.22,1,.36,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+
+.hero h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:700;color:#fff;
+  letter-spacing:-.028em;line-height:1.08;margin:0 auto 11px;
+  text-shadow:0 2px 30px rgba(1,29,43,.5);
+  animation:rise 1s .12s cubic-bezier(.22,1,.36,1) both}
+/* Sin pastilla: a secas, discreto, debajo del titulo. */
+.hero .origen{font-size:clamp(.84rem,1.35vw,1rem);font-weight:500;letter-spacing:.03em;
+  color:#cfe9f3;margin:0;text-shadow:0 1px 18px rgba(1,29,43,.95),0 1px 3px rgba(1,29,43,.8);
+  animation:rise 1s .22s cubic-bezier(.22,1,.36,1) both}
+.hero .lead-hero{max-width:46ch;margin:0 auto 22px;color:#b8dced;
+  font-size:clamp(.94rem,1.4vw,1.06rem);
+  animation:rise 1s .32s cubic-bezier(.22,1,.36,1) both}
+.cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;
+  animation:rise 1s .42s cubic-bezier(.22,1,.36,1) both}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:999px;
+  font-weight:600;font-size:.95rem;transition:transform .15s,box-shadow .2s,background .2s,color .2s}
+.btn.primary{background:#fff;color:var(--teal-900);box-shadow:0 8px 26px rgba(0,0,0,.28)}
+.btn.primary:hover{background:var(--teal-100);transform:translateY(-2px)}
+.btn.ghost{border:1px solid rgba(255,255,255,.34);color:#fff;background:rgba(255,255,255,.06);
+  backdrop-filter:blur(6px)}
+.btn.ghost:hover{border-color:#fff;background:rgba(255,255,255,.14);transform:translateY(-2px)}
+/* Dentro de las secciones claras los botones vuelven al estilo de marca. */
+section .btn.primary{background:var(--teal-700);color:#fff;box-shadow:0 5px 18px rgba(0,119,182,.26)}
+section .btn.primary:hover{background:var(--teal-900)}
+section .btn.ghost{border-color:var(--line);color:var(--ink-2);background:#fff;backdrop-filter:none}
+section .btn.ghost:hover{border-color:var(--teal-300);color:var(--teal-700)}
+
+/* ---------- cifras ---------- */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:clamp(30px,5vw,46px) 0;margin:0}
+.stat .n{font-size:clamp(2rem,4.4vw,2.9rem);font-weight:700;color:var(--teal-700);
+  letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.stat .l{font-size:.87rem;color:var(--muted);margin-top:3px}
+
+/* ---------- tarjetas ---------- */
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(248px,1fr))}
+.card{border:1px solid var(--line);border-radius:var(--r);padding:24px;background:#fff;
+  transition:transform .28s cubic-bezier(.22,1,.36,1),box-shadow .28s,border-color .28s}
+.card:hover{transform:translateY(-4px);border-color:var(--teal-100);
+  box-shadow:0 12px 34px rgba(10,37,53,.08)}
+.card h3{font-size:1.08rem;font-weight:600;margin-bottom:7px}
+.card p{color:var(--ink-2);font-size:.93rem}
+.card .ic{width:40px;height:40px;border-radius:11px;background:var(--teal-50);color:var(--teal-700);
+  display:grid;place-items:center;font-size:1.15rem;margin-bottom:14px}
+
+/* ---------- equipo ---------- */
+.person{text-align:center;padding:28px 20px}
+/* Telefono de cada integrante: enlace tel:, que en el celular marca de un
+   toque y en escritorio al menos se puede copiar de un vistazo. */
+.person .tel{display:inline-flex;align-items:center;gap:7px;margin-top:14px;
+  font-family:var(--mono);font-size:.84rem;letter-spacing:-.01em;color:var(--teal-700);
+  padding:7px 13px;border:1px solid var(--line);border-radius:999px;
+  transition:border-color .2s,background .2s,transform .2s}
+.person .tel:hover{border-color:var(--teal-300);background:var(--teal-50);transform:translateY(-1px)}
+.person .tel svg{flex:none;opacity:.75}
+.avatar{width:96px;height:96px;border-radius:50%;margin:0 auto 15px;display:grid;place-items:center;
+  font-size:1.7rem;font-weight:700;color:#fff;letter-spacing:.02em;
+  background:linear-gradient(135deg,var(--teal-500),var(--green));
+  box-shadow:0 7px 20px rgba(21,103,90,.24);overflow:hidden}
+.avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.person .role{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;color:var(--teal-600);
+  text-transform:uppercase;margin:5px 0 9px}
+
+/* ---------- prototipo 3D ---------- */
+.proto{background:linear-gradient(180deg,#fff,var(--bg-soft) 30%,var(--bg-soft) 70%,#fff)}
+.stage{display:grid;grid-template-columns:1fr 1fr;gap:38px;align-items:start}
+.viewer{position:sticky;top:calc(var(--nav) + 18px);height:min(70vh,540px);cursor:grab;touch-action:none;
+  border-radius:var(--r);overflow:hidden;background:
+    radial-gradient(70% 60% at 50% 38%,#fff,var(--teal-50));
+  border:1px solid var(--line)}
+.viewer canvas{position:absolute;inset:0;display:block}
+.viewer:active{cursor:grabbing}
+.viewer .badge{position:absolute;left:14px;bottom:13px;font-family:var(--mono);font-size:.63rem;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+  background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:999px;padding:5px 11px}
+.viewer .loading{position:absolute;inset:0;display:grid;place-items:center;color:var(--muted);
+  font-family:var(--mono);font-size:.76rem}
+.specs{display:grid;gap:11px}
+.spec{display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+  padding:14px 17px;border:1px solid var(--line);border-radius:11px;background:#fff;
+  transition:border-color .2s,transform .2s}
+.spec:hover{border-color:var(--teal-100);transform:translateX(3px)}
+.spec dt{font-size:.87rem;color:var(--muted)}
+.spec dd{font-family:var(--mono);font-size:.85rem;color:var(--ink);text-align:right;font-weight:500}
+.wip{display:inline-block;margin-left:7px;font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;
+  background:#fff4e6;color:#a4622a;border:1px solid #f3d9bd;border-radius:999px;padding:2px 8px;
+  font-weight:600;vertical-align:middle}
+
+/* ---------- código ---------- */
+.repo{display:flex;gap:15px;align-items:flex-start;padding:21px;border:1px solid var(--line);
+  border-radius:var(--r);background:#fff;transition:border-color .22s,transform .22s,box-shadow .22s}
+.repo:hover{border-color:var(--teal-300);transform:translateY(-3px);box-shadow:0 10px 28px rgba(10,37,53,.07)}
+.repo .ic{flex:none;width:38px;height:38px;border-radius:10px;background:var(--ink);color:#fff;
+  display:grid;place-items:center;font-family:var(--mono);font-size:.95rem}
+.repo h3{font-size:1rem;margin-bottom:3px}
+.repo p{font-size:.87rem;color:var(--ink-2)}
+.repo .u{font-family:var(--mono);font-size:.72rem;color:var(--teal-600);margin-top:7px;
+  word-break:break-all}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
+.tag{font-family:var(--mono);font-size:.66rem;padding:3px 9px;border-radius:999px;
+  background:var(--teal-50);color:var(--teal-700)}
+
+/* ---------- finanzas ---------- */
+.finenote{font-size:.78rem;color:var(--muted);line-height:1.55;padding:14px 24px 20px;
+  border-top:1px solid var(--line-2)}
+.finenote span{font-style:italic;opacity:.8}
+.pending{border:1px dashed var(--teal-300);border-radius:var(--r);padding:26px;
+  background:var(--teal-50);color:var(--ink-2)}
+.pending b{color:var(--ink)}
+table.fin{width:100%;border-collapse:collapse;font-size:.9rem}
+table.fin th,table.fin td{padding:11px 13px;border-bottom:1px solid var(--line);text-align:left}
+table.fin th{font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:600}
+table.fin td.n,table.fin th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+table.fin tfoot td{font-weight:700;border-bottom:none;border-top:2px solid var(--line)}
+.scroller{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+.src{font-size:.72rem;color:var(--muted);margin-top:12px;line-height:1.5}
+.ethic{display:flex;gap:26px;align-items:flex-start;flex-wrap:wrap;margin-top:34px;
+  padding:26px 28px;border-radius:var(--r);background:var(--teal-900);color:#cfe9f3}
+.ethic .big{font-size:clamp(2.6rem,6vw,3.8rem);font-weight:700;color:#fff;line-height:1;
+  letter-spacing:-.03em;flex:none}
+.ethic .big span{font-size:.45em;opacity:.7}
+.ethic h3{color:#fff;font-size:1.12rem;margin-bottom:7px}
+.ethic p{font-size:.93rem;max-width:58ch}
+.ethic .src{color:var(--teal-300);opacity:.85}
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:16px}
+.shot.video{margin-top:20px}
+/* Columna, no fila: el <video> y el <figcaption> son ambos hijos del flex, y
+   en fila el pie se iba al costado y el video quedaba descentrado. */
+.shot.video{background:#0b2430;display:flex;flex-direction:column;align-items:center}
+.shot.video video{display:block;background:#0b2430;max-width:100%;
+  max-height:min(70vh,620px);width:auto;height:auto}
+/* Un video de telefono es vertical: forzarlo a 16:9 recortaba casi todo el
+   encuadre. Se respeta su proporcion y se centra sobre fondo oscuro. */
+.shot.video.vertical{padding:0 clamp(8px,4vw,40px)}
+.shot.video figcaption{position:static;background:#0b2430;color:#b8dced;width:100%}
+.shot.video.vertical figcaption{text-align:center}
+.shot{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);
+  background:var(--bg-soft)}
+/* Las fotos ya vienen recortadas al robot en assets/, así que aquí solo se
+   ajustan al alto de la tarjeta. Las originales eran verticales con el robot
+   en el tercio inferior: recortarlas por CSS mostraba puro cielo. */
+.shot img{width:100%;height:340px;object-fit:cover;
+  transition:transform .6s cubic-bezier(.22,1,.36,1)}
+.shot:hover img{transform:scale(1.04)}
+.shot figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 16px 13px;
+  font-size:.82rem;color:#fff;
+  background:linear-gradient(transparent,rgba(2,62,88,.86))}
+.tests{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:18px}
+.test{padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:#fff}
+.test .v{font-size:1.5rem;font-weight:700;color:var(--teal-700);letter-spacing:-.02em}
+.test .k{font-size:.8rem;color:var(--muted);margin-top:2px}
+.price{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:20px}
+.price .p{padding:26px;border-radius:var(--r);border:1px solid var(--line);background:#fff}
+.price .p.hi{background:var(--teal-900);color:#cfe9f3;border-color:var(--teal-900)}
+.price .p.hi h3,.price .p.hi .amt{color:#fff}
+.price .amt{font-size:2.1rem;font-weight:700;color:var(--teal-700);letter-spacing:-.03em;
+  font-variant-numeric:tabular-nums}
+.price .per{font-size:.8rem;color:var(--muted);font-weight:500}
+.price .p.hi .per{color:var(--teal-300)}
+.price p{font-size:.88rem;margin-top:9px}
+.bars{display:grid;gap:10px;margin-top:18px}
+.bar{display:grid;grid-template-columns:92px 1fr auto;gap:13px;align-items:center;font-size:.87rem}
+.bar .t{color:var(--muted);font-family:var(--mono);font-size:.78rem}
+.bar .track{height:26px;background:var(--line-2);border-radius:7px;overflow:hidden}
+/* display:block no es opcional: <i> es inline por defecto, y width/height
+   no aplican a elementos en linea. La barra existia con tamano cero. */
+.bar .fill{display:block;height:100%;border-radius:7px;
+  background:linear-gradient(90deg,var(--teal-500),var(--green));
+  width:0;transition:width 1.1s cubic-bezier(.22,1,.36,1)}
+.bar .v{font-family:var(--mono);font-weight:600;font-variant-numeric:tabular-nums}
+.ctx{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:24px}
+
+/* ---------- ritmo de color entre secciones ----------
+   Alternar claro y oscuro evita la monotonía de fondos blancos y hace que las
+   capturas de la app resalten sobre el teal profundo de la marca. */
+.tint-soft{background:linear-gradient(180deg,#fff,var(--teal-50) 40%,var(--teal-50) 60%,#fff)}
+.tint-deep{background:var(--teal-900);color:#cfe9f3}
+.tint-deep h2,.tint-deep h3,.tint-deep b{color:#fff}
+.tint-deep .eyebrow{color:var(--teal-300)}
+.tint-deep .lead,.tint-deep p{color:#b8dced}
+.tint-deep .card{background:rgba(255,255,255,.055);border-color:rgba(255,255,255,.14)}
+.tint-deep .card:hover{border-color:var(--teal-300);background:rgba(255,255,255,.09);
+  box-shadow:0 12px 34px rgba(0,0,0,.22)}
+.tint-deep .card .ic{background:rgba(77,203,224,.16);color:var(--teal-300)}
+.tint-deep .btn.primary{background:var(--teal-500);color:var(--teal-900);
+  box-shadow:0 6px 22px rgba(0,180,216,.3)}
+.tint-deep .btn.primary:hover{background:#fff}
+.nota{margin-top:16px;padding:15px 18px;border-left:3px solid var(--amber);
+  background:#fff8f0;border-radius:0 10px 10px 0;font-size:.9rem;color:var(--ink-2)}
+.shotbig{border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:#fff}
+.tint-deep .shotbig{border-color:rgba(255,255,255,.16);background:rgba(255,255,255,.05)}
+.shotbig img{width:100%;display:block}
+.shotbig figcaption{padding:13px 17px;font-size:.85rem;color:var(--ink-2);background:#fff}
+.tint-deep .shotbig figcaption{background:rgba(255,255,255,.06);color:#b8dced}
+.tint-deep .shotbig figcaption b{color:#fff}
+
+/* ---------- productos ---------- */
+.producto{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(24px,4vw,56px);align-items:center;
+  border:1px solid var(--line);border-radius:calc(var(--r) + 8px);overflow:hidden;background:#fff;
+  box-shadow:0 1px 2px rgba(10,37,53,.04),0 18px 50px rgba(10,37,53,.06)}
+.producto .foto{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--teal-900)}
+.producto .foto img{width:100%;height:100%;object-fit:cover;
+  transition:transform 1.1s cubic-bezier(.22,1,.36,1)}
+.producto:hover .foto img{transform:scale(1.045)}
+.producto .cuerpo{padding:clamp(22px,3vw,44px) clamp(22px,3vw,44px) clamp(22px,3vw,44px) 0}
+.producto .etiqueta{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);
+  font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-700);
+  background:var(--teal-50);padding:5px 11px;border-radius:999px;margin-bottom:14px}
+.producto h3{font-size:clamp(1.5rem,2.6vw,2.1rem);font-weight:700;margin-bottom:10px}
+.producto .specs{display:flex;gap:26px;flex-wrap:wrap;margin:20px 0 24px;
+  padding-top:18px;border-top:1px solid var(--line-2)}
+.producto .specs div{min-width:76px}
+.producto .specs b{display:block;font-family:var(--mono);font-size:1.18rem;color:var(--teal-700)}
+.producto .specs span{font-size:.8rem;color:var(--muted)}
+@media (max-width:880px){
+  .producto{grid-template-columns:1fr}
+  .producto .cuerpo{padding:0 clamp(20px,5vw,30px) clamp(26px,5vw,34px)}
+}
+
+/* Tarjeta que ademas es enlace: la flecha avisa que lleva a otra pagina. */
+.card.enlace{display:flex;flex-direction:column;color:inherit}
+.card.enlace .mas{margin-top:auto;padding-top:16px;font-family:var(--mono);font-size:.78rem;
+  letter-spacing:.04em;color:var(--teal-700);display:inline-flex;align-items:center;gap:6px}
+.card.enlace .mas i{font-style:normal;transition:transform .25s}
+.card.enlace:hover .mas i{transform:translate(3px,-3px)}
+
+/* ---------- variantes en desarrollo ---------- */
+.variantes{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-top:28px}
+.variante{position:relative;border:1px dashed var(--line);border-radius:var(--r);padding:30px 28px;
+  background:linear-gradient(180deg,var(--bg-soft),#fff);overflow:hidden;
+  transition:transform .35s cubic-bezier(.22,1,.36,1),border-color .35s,box-shadow .35s}
+.variante:hover{transform:translateY(-5px);border-color:var(--teal-300);
+  box-shadow:0 16px 40px rgba(10,37,53,.08)}
+/* Borde discontinuo y trama diagonal: se lee "todavia no esta" sin escribirlo. */
+.variante::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.4;
+  background:repeating-linear-gradient(135deg,transparent 0 11px,rgba(0,119,182,.045) 11px 12px)}
+.variante .badge{display:inline-block;font-family:var(--mono);font-size:.64rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--teal-700);background:var(--teal-50);
+  border:1px solid var(--teal-100);padding:5px 10px;border-radius:999px;margin-bottom:16px}
+.variante h3{font-size:1.5rem;font-weight:700;letter-spacing:-.01em}
+.variante h3 span{color:var(--muted);font-weight:500}
+.variante .rol{font-family:var(--mono);font-size:.78rem;letter-spacing:.04em;color:var(--teal-700);
+  margin:4px 0 14px}
+.variante p{color:var(--ink-2);font-size:.94rem}
+
+/* ---------- servicios ---------- */
+.servicios{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-top:36px}
+.servicio{position:relative;border:1px solid rgba(255,255,255,.14);border-radius:var(--r);
+  padding:clamp(26px,3vw,38px);background:rgba(255,255,255,.055);overflow:hidden;
+  transition:transform .4s cubic-bezier(.22,1,.36,1),border-color .4s,background .4s}
+.servicio:hover{transform:translateY(-6px);border-color:var(--teal-300);background:rgba(255,255,255,.1)}
+/* Brillo que sigue al cursor: se mueve con dos variables que pone el JS. */
+.servicio::before{content:"";position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(77,203,224,.16),transparent 62%);
+  opacity:0;transition:opacity .4s}
+.servicio:hover::before{opacity:1}
+.servicio .num{font-family:var(--mono);font-size:.74rem;letter-spacing:.2em;color:var(--teal-300);
+  display:block;margin-bottom:16px}
+.servicio h3{font-size:1.28rem;margin-bottom:10px}
+.servicio ul{list-style:none;margin-top:18px;display:grid;gap:9px}
+.servicio li{display:flex;gap:10px;font-size:.92rem;color:#b8dced}
+.servicio li::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;
+  background:var(--teal-300);margin-top:.5em}
+
+/* ---------- contacto ---------- */
+.contacto{display:grid;grid-template-columns:repeat(auto-fit,minmax(246px,1fr));gap:18px;margin-top:36px}
+.vía{display:flex;flex-direction:column;gap:5px;padding:24px;border:1px solid var(--line);
+  border-radius:var(--r);background:#fff;transition:transform .3s,border-color .3s,box-shadow .3s}
+.vía:hover{transform:translateY(-4px);border-color:var(--teal-300);box-shadow:0 14px 34px rgba(10,37,53,.08)}
+.vía .ic{width:38px;height:38px;border-radius:11px;background:var(--teal-50);color:var(--teal-700);
+  display:grid;place-items:center;margin-bottom:12px}
+.vía .ic svg{width:19px;height:19px}
+.vía h4{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.vía a,.vía .dato{font-family:var(--mono);font-size:.92rem;color:var(--teal-700);word-break:break-word}
+.vía .sub{font-size:.82rem;color:var(--muted);font-family:var(--ff)}
+
+/* ---------- pie ---------- */
+/* ---------- tira de Instagram ---------- */
+/* El degradado se mueve despacio de lado a lado: es lo que hace que la tira
+   se note sin subirle el tamano ni gritar. */
+.ig-tira{position:relative;display:flex;align-items:center;justify-content:center;gap:13px;
+  flex-wrap:wrap;padding:15px 24px;color:#fff;font-size:.97rem;overflow:hidden;
+  background:linear-gradient(100deg,var(--green-dark),var(--green) 32%,#12806c 58%,var(--green-dark));
+  background-size:220% 100%;animation:tiraluz 16s ease-in-out infinite;
+  transition:filter .25s}
+.ig-tira:hover{filter:brightness(1.12)}
+@keyframes tiraluz{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+/* El glifo lleva el degradado real de Instagram: es lo unico que se reconoce
+   al instante, y da color sin repintar el resto del sitio. */
+.ig-tira .glifo{width:30px;height:30px;border-radius:9px;flex:none;display:grid;place-items:center;
+  background:radial-gradient(circle at 28% 108%,#fdf497 0%,#fdf497 5%,#fd5949 45%,#d6249f 62%,#285aeb 92%);box-shadow:0 2px 10px rgba(0,0,0,.28)}
+.ig-tira .glifo svg{width:18px;height:18px}
+.ig-tira .txt{text-transform:uppercase;letter-spacing:.16em;font-size:.8rem;
+  font-weight:600;opacity:.92}
+.ig-tira b{font-family:var(--mono);font-weight:500;letter-spacing:-.01em}
+.ig-tira .arw{opacity:.8;transition:transform .25s}
+.ig-tira:hover .arw{transform:translate(3px,-3px)}
+@media (prefers-reduced-motion:reduce){.ig-tira{animation:none}}
+
+/* ---------- testimonios ---------- */
+/* Pegados a finanzas: con el relleno normal de seccion quedaban 215 px de
+   blanco entre una cosa y otra, y la seccion se perdia. */
+#finanzas{padding-bottom:clamp(38px,5vw,64px)}
+#testimonios{padding-top:clamp(26px,3.5vw,48px)}
+
+/* A sangre y con los bordes desvanecidos: asi se lee como cinta continua y
+   no como una lista que alguien corto. */
+.testi-cinta{margin:32px 0 0;margin-inline:calc(-1 * clamp(20px,5vw,40px));overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.testi-riel{display:flex;gap:28px;width:max-content;align-items:stretch;
+  animation:cinta var(--dur,40s) linear infinite}
+/* Se detiene al pasar el cursor: si no, es imposible terminar de leer uno. */
+.testi-cinta:hover .testi-riel{animation-play-state:paused}
+.testi-juego{display:flex;gap:28px;align-items:stretch}
+@keyframes cinta{to{transform:translateX(calc(-1 * var(--paso)))}}
+@media (prefers-reduced-motion:reduce){
+  .testi-riel{animation:none}
+  .testi-cinta{overflow-x:auto}
+}
+
+.quote{width:min(330px,78vw);flex:none;border:1px solid var(--line);border-radius:var(--r);
+  padding:24px 24px 20px;background:#fff;display:flex;flex-direction:column;gap:14px;
+  transition:border-color .25s,box-shadow .25s}
+.quote:hover{border-color:var(--teal-100);box-shadow:0 12px 30px rgba(10,37,53,.07)}
+.quote .qm{font-family:Georgia,serif;font-size:2.7rem;line-height:.55;color:var(--teal-300);height:16px}
+/* flex:1 empuja la firma al fondo: con textos de largo distinto las tarjetas
+   quedan desalineadas si la firma sigue al texto. */
+.quote p{color:var(--ink-2);font-size:.96rem;flex:1}
+.quote .who{display:flex;align-items:center;gap:12px;padding-top:13px;border-top:1px solid var(--line-2)}
+.quote .ini{width:38px;height:38px;flex:none;border-radius:50%;background:var(--teal-50);
+  color:var(--teal-700);display:grid;place-items:center;font-weight:700;font-size:.8rem;letter-spacing:.03em}
+.quote .who b{display:block;font-size:.92rem;font-weight:600}
+.quote .who span{display:block;font-size:.82rem;color:var(--muted);line-height:1.35}
+.testi-cta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:32px}
+.testi-cta small{color:var(--muted);font-size:.85rem}
+
+footer{background:var(--teal-900);color:#cfe9f3;padding:clamp(46px,7vw,72px) clamp(20px,5vw,40px) 34px}
+footer a{color:var(--teal-100)}
+footer a:hover{color:#fff}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:30px;
+  max-width:1120px;margin:0 auto}
+.fgrid h4{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-300);
+  margin-bottom:12px;font-weight:600}
+.fgrid li{list-style:none;margin-bottom:7px;font-size:.9rem}
+.fbottom{max-width:1120px;margin:34px auto 0;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);
+  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:.8rem;opacity:.72}
+
+@media (max-width:860px){
+  .stage{grid-template-columns:1fr}
+  .viewer{position:relative;top:0;height:58vh}
+}
+@media (max-width:720px){
+  .nav-right{gap:7px}
+  .nav ul{position:fixed;top:var(--nav);left:0;right:0;flex-direction:column;gap:0;
+    background:#fff;border-bottom:1px solid var(--line);padding:8px;
+    box-shadow:0 14px 30px rgba(10,37,53,.1)}
+  .nav ul[hidden]{display:none!important}
+  .nav ul a{padding:12px 16px;border-radius:9px}
+  .navtoggle{display:block}
+  .btn-app{padding:7px 13px;font-size:.8rem}
+  .btn-ig{padding:7px 10px}
+  .btn-ig span{display:none}
+}

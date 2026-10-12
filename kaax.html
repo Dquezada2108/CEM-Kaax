@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kaax · la plataforma · DAY1 Robotics</title>
+<meta name="description" content="Cómo funciona Kaax: el prototipo, la estación de control y los costos.">
+<meta name="theme-color" content="#255764">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="assets/favicon-512.png">
+<link rel="apple-touch-icon" href="assets/favicon-180.png">
+<meta property="og:title" content="Kaax · la plataforma · DAY1 Robotics">
+<meta property="og:description" content="Cómo funciona Kaax: el prototipo, la estación de control y los costos.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=4f3772b7">
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="index.html" class="mark" aria-label="DAY1 Robotics">
+    <img src="assets/day1_logo.png" alt="DAY1 Robotics"
+         onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'fallback',textContent:'DAY1'}))">
+  </a>
+  <div class="nav-right">
+    <ul id="navlist">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="productos.html">Productos</a></li>
+      <li><a href="servicios.html">Servicios</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+    </ul>
+    <a class="btn-ig" href="https://www.instagram.com/day1robotics/" target="_blank"
+       rel="noopener" aria-label="Instagram de DAY1 Robotics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2.7" y="2.7" width="18.6" height="18.6" rx="5.4"/><circle cx="12" cy="12" r="4.15"/><circle cx="17.35" cy="6.65" r="1.15" fill="currentColor" stroke="none"/></svg><span>Instagram</span></a>
+    <a class="btn-app" href="https://dquezada2108.github.io/kaax_app/"
+       target="_blank" rel="noopener">Abrir la app<span class="arw" aria-hidden="true">↗</span></a>
+    <button class="navtoggle" id="navtoggle" aria-label="Menú" aria-expanded="false" aria-controls="navlist">☰</button>
+  </div>
+</nav>
+
+<section id="prototipo" class="proto">
+  <div class="wrap">
+    <div class="eyebrow reveal">La tecnología</div>
+    <h2 class="reveal">El prototipo</h2>
+    <p class="lead reveal" style="margin-bottom:36px">Un catamarán autónomo con GPS, propulsión
+      dual y rodillos que empujan el material hacia adentro. A bordo lleva una Raspberry Pi 5
+      que crea su propia red WiFi, así que funciona sin señal en el agua.</p>
+
+    <div class="stage">
+      <div class="viewer" id="viewer">
+        <div class="loading" id="viewer-loading">cargando modelo…</div>
+        <div class="badge">Chasis · Base V3 — arrástralo para girarlo</div>
+      </div>
+
+      <dl class="specs reveal">
+        <div class="spec"><dt>Computadora a bordo</dt><dd>Raspberry Pi 5</dd></div>
+        <div class="spec"><dt>Enlace</dt><dd>WiFi · hotspot propio</dd></div>
+        <div class="spec"><dt>Navegación</dt><dd>GPS NEO-6M · NMEA</dd></div>
+        <div class="spec"><dt>Propulsión</dt><dd>2 × thruster con ESC</dd></div>
+        <div class="spec"><dt>Recolección</dt><dd>2 × servo 360° (rodillos)</dd></div>
+        <div class="spec"><dt>Energía</dt><dd>2 × LiPo 4S</dd></div>
+        <div class="spec"><dt>Visión</dt><dd>Cámara + Teachable Machine</dd></div>
+        <div class="spec"><dt>Seguridad</dt><dd>Failsafe a 1.5 s sin enlace</dd></div>
+        <div class="spec"><dt>Control</dt><dd>Teleoperado <span class="wip">autónomo en desarrollo</span></dd></div>
+      </dl>
+    </div>
+
+    <div class="reveal" style="margin-top:clamp(38px,6vw,64px)">
+      <h3 style="font-size:1.25rem;margin-bottom:4px">Funcionamiento en campo</h3>
+      <p style="color:var(--ink-2);font-size:.94rem">Pruebas del prototipo en presa,
+         México.</p>
+      <!-- El video se muestra solo si el archivo existe; si no, esta figura se
+           queda oculta y las fotos ocupan el ancho, sin huecos ni reproductor
+           roto. Ver assets/README.md. -->
+      <figure class="shot video" id="video-campo" hidden>
+        <!-- El video arranca con un fotograma negro, asi que lleva poster
+             extraido de el mismo. -->
+        <video id="campo-video" controls playsinline preload="metadata"
+               poster="assets/campo-poster.jpg">
+          <source src="assets/campo.mp4#t=0.5" type="video/mp4">
+        </video>
+        <figcaption>Kaax en operación · prueba en presa</figcaption>
+      </figure>
+
+      <div class="shots">
+        <figure class="shot">
+          <img src="assets/campo1.jpg" alt="Kaax navegando en la presa" loading="lazy">
+          <figcaption>Navegación autónoma sobre agua abierta</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/campo2.jpg" alt="Kaax con la electrónica sellada a bordo" loading="lazy">
+          <figcaption>Electrónica sellada sobre la cubierta</figcaption>
+        </figure>
+      </div>
+      <p class="nota reveal"><b>Sobre los 4 kg:</b> es la <b>capacidad de carga</b> del
+        robot, no lo que recoge en una jornada. Kaax no transporta el material a bordo:
+        lo <b>arrastra</b> hacia la orilla con los rodillos y la red, así que lo recolectado
+        no está limitado por ese peso. Los 4 kg son lo que puede llevar encima —
+        electrónica, baterías e instrumentos— sin perder estabilidad ni flotación.</p>
+      <div class="tests">
+        <div class="test"><div class="v">Flotó</div><div class="k">en todas las pruebas, desplazándose correctamente</div></div>
+        <div class="test"><div class="v">4 kg</div><div class="k">de capacidad de carga, con operación estable</div></div>
+        <div class="test"><div class="v">Sin filtraciones</div><div class="k">componentes sellados, impermeabilización validada</div></div>
+      </div>
+    </div>
+
+    <div class="grid g2" style="margin-top:clamp(38px,6vw,64px)">
+      <article class="card reveal">
+        <div class="ic">⬡</div>
+        <h3>Autonomía en el agua</h3>
+        <p>Si el robot deja de recibir órdenes por más de 1.5 segundos, los motores y los
+          rodillos se detienen solos. Un rodillo girando sin enlace no se para por sí mismo,
+          y esa es justo la situación que el sistema tiene que cubrir.</p>
+      </article>
+      <article class="card reveal">
+        <div class="ic">◐</div>
+        <h3>Autonomía: lo que hay y lo que falta</h3>
+        <p>Hoy Kaax se <b>teleopera</b>: un operador lo conduce desde la estación de control
+          y el robot registra su recorrido por GPS. El <b>modo autónomo está planeado y
+          sigue en desarrollo</b> — la detección de sargazo por color y las rutas
+          predictivas ya están diseñadas, pero todavía no operan solas en el agua.</p>
+        <p style="margin-top:12px">Cuando llegue, será autonomía acotada y siempre bajo
+          supervisión humana. Ante la duda, no captar: un falso positivo tiene consecuencia
+          física sobre fauna viva.</p>
+      </article>
+      <article class="card reveal">
+        <div class="ic">▦</div>
+        <h3>Medición, no estimación</h3>
+        <p>Cada jornada registra distancia recorrida por GPS, velocidad media, área barrida
+          y cuadrantes limpiados. El peso recolectado se captura a mano al pesar la carga,
+          porque inventarlo haría inútil el resto.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="codigo" class="tint-deep">
+  <div class="wrap">
+    <div class="eyebrow reveal">El software</div>
+    <h2 class="reveal">La estación de control</h2>
+    <p class="lead reveal" style="margin-bottom:34px">Kaax no se maneja con un control
+      remoto: se maneja desde una interfaz que además mide. Corre en el navegador, se
+      instala como aplicación y <b>funciona sin internet</b>, porque en el agua no hay
+      señal.</p>
+
+    <figure class="shotbig reveal">
+      <img src="assets/app-flota.png" alt="Vista de flota: mapa en vivo, control y telemetría" loading="lazy">
+      <figcaption><b>Flota.</b> Posición de cada robot en el mapa, telemetría en vivo,
+        control por teclado o mando, y los rodillos de recolección.</figcaption>
+    </figure>
+
+    <div class="grid g2" style="margin-top:18px">
+      <figure class="shotbig reveal">
+        <img src="assets/app-cuadricula.png" alt="Cuadrícula de limpieza sobre el mapa" loading="lazy">
+        <figcaption><b>Cuadrícula.</b> La zona se divide en cuadrantes y los que el robot
+          recorre se marcan solos con el GPS.</figcaption>
+      </figure>
+      <figure class="shotbig reveal">
+        <img src="assets/app-reportes.png" alt="Reportes con indicadores y gráfica por jornada" loading="lazy">
+        <figcaption><b>Reportes.</b> Kilos por tipo de contaminante, área barrida,
+          distancia y ritmo, jornada por jornada.</figcaption>
+      </figure>
+    </div>
+
+    <div class="grid g3 reveal" style="margin-top:26px">
+      <article class="card">
+        <div class="ic">⬇</div>
+        <h3>Sin internet</h3>
+        <p>La aplicación y el mapa se guardan en el dispositivo antes de salir. En el
+          agua todo se registra, y al volver a la red se sincroniza solo.</p>
+      </article>
+      <article class="card">
+        <div class="ic">◷</div>
+        <h3>Mide mientras trabaja</h3>
+        <p>Distancia por GPS, velocidad, área barrida y cuadrantes limpiados salen de la
+          propia jornada. El peso se captura al pesar la carga.</p>
+      </article>
+      <article class="card">
+        <div class="ic">⚑</div>
+        <h3>Cuentas por equipo</h3>
+        <p>Cada operador entra con su cuenta y las jornadas quedan asociadas a él, así el
+          historial de un cuerpo de agua es de todo el equipo.</p>
+      </article>
+    </div>
+
+    <div class="cta reveal" style="margin-top:30px;justify-content:flex-start">
+      <a class="btn primary" href="https://dquezada2108.github.io/kaax_app/" target="_blank" rel="noopener">Probar la estación de control</a>
+    </div>
+  </div>
+</section>
+
+<section id="finanzas" class="tint-soft">
+  <div class="wrap">
+    <div class="eyebrow reveal">Cuentas claras</div>
+    <h2 class="reveal">Finanzas</h2>
+    <p class="lead reveal" style="margin-bottom:30px">Qué cuesta construir un Kaax y de dónde
+      sale el dinero.</p>
+
+    <div class="price reveal">
+      <div class="p hi">
+        <h3>Venta</h3>
+        <div class="amt">$25,000<span class="per"> / unidad</span></div>
+        <p>Robot, mecanismo de captación, estación de control y capacitación.</p>
+      </div>
+      <div class="p">
+        <h3>Suscripción</h3>
+        <div class="amt">$800<span class="per"> / mes</span></div>
+        <p>Soporte, refacciones de desgaste y plataforma de datos.</p>
+      </div>
+    </div>
+
+    <div class="card reveal" style="margin-top:20px">
+      <h3>Costo unitario de producción</h3>
+      <p style="color:var(--ink-2);font-size:.9rem;margin-bottom:4px">El costo por unidad
+         cae a menos de la mitad al pasar de una pieza a una serie de cincuenta.</p>
+      <div class="bars" id="bars">
+        <div class="bar"><span class="t">1 unidad</span><span class="track"><i class="fill" data-v="16000"></i></span><span class="v">$16,000</span></div>
+        <div class="bar"><span class="t">10 unidades</span><span class="track"><i class="fill" data-v="9000"></i></span><span class="v">$9,000</span></div>
+        <div class="bar"><span class="t">50 unidades</span><span class="track"><i class="fill" data-v="7000"></i></span><span class="v">$7,000</span></div>
+        <div class="bar"><span class="t">250 unidades</span><span class="track"><i class="fill" data-v="6500"></i></span><span class="v">$6,500</span></div>
+      </div>
+      <p class="src">Punto de equilibrio anual estimado en 50 unidades. Cifras en pesos
+         mexicanos.</p>
+    </div>
+
+    <div class="ctx">
+      <article class="card reveal">
+        <div class="ic">◲</div>
+        <h3>$86 millones</h3>
+        <p>Presupuesto de limpieza de <b>un solo municipio</b> en 2026. El mercado no hay que
+           crearlo: ya existe y ya se gasta.</p>
+        <p class="src">Heraldo de México Quintana Roo (2026)</p>
+      </article>
+      <article class="card reveal">
+        <div class="ic">◳</div>
+        <h3>$90,000 · 9 meses</h3>
+        <p>Costo de jornaleros en Tulum durante nueve meses de temporada, haciendo a mano
+           el trabajo que Kaax automatiza.</p>
+      </article>
+      <article class="card reveal">
+        <div class="ic">◴</div>
+        <h3>Público objetivo</h3>
+        <p>Municipios y gobiernos estatales · CONAGUA y SEMARNAT · cooperativas pesqueras ·
+           operadores turísticos de la Riviera Maya, Pátzcuaro y Valle de Bravo.</p>
+      </article>
+    </div>
+
+    <div class="card reveal" style="margin-top:20px;padding:0;overflow:hidden">
+      <div style="padding:22px 24px 8px">
+        <h3>Materiales de un robot</h3>
+        <p style="color:var(--muted);font-size:.85rem;margin-top:3px">
+          Costo de materiales de una unidad, en pesos. Es lo que cuesta construirla a mano:
+          no incluye horas de trabajo ni la reducción por volumen del cuadro de arriba.</p>
+      </div>
+      <div class="scroller">
+        <table class="fin">
+          <thead><tr><th>Partida</th><th>Qué incluye</th><th class="n">MXN</th></tr></thead>
+          <tbody>
+            <tr><td>Motores y demás</td><td>Thrusters con ESC, baterías LiPo 4S y GPS</td><td class="n">$3,600</td></tr>
+            <tr><td>Raspberry</td><td>Computadora de a bordo</td><td class="n">$5,000</td></tr>
+            <tr><td>Estructura</td><td>Caja estanca, espuma de flotación y herrajes</td><td class="n">$1,800</td></tr>
+            <tr><td>Filamento</td><td>PLA, PETG y ASA para las piezas impresas</td><td class="n">$538</td></tr>
+            <tr><td>Materiales 1</td><td>Consumibles y ferretería</td><td class="n">$200</td></tr>
+            <tr><td>Materiales 2</td><td>Consumibles y ferretería</td><td class="n">$100</td></tr>
+          </tbody>
+          <tfoot><tr><td colspan="2">Total en materiales</td><td class="n">$11,238</td></tr></tfoot>
+        </table>
+      </div>
+      <p class="finenote">El costo final de producción está redondeado tomando en cuenta
+        rediseños de piezas, tornillería y consumibles. <span>¿A quién no se le ha perdido
+        un tornillo alguna vez?</span></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fgrid">
+    <div>
+      <img src="assets/day1_logo.png" alt="DAY1 Robotics" style="height:30px;width:auto;
+           filter:brightness(0) invert(1);opacity:.92;margin-bottom:12px"
+           onerror="this.replaceWith(Object.assign(document.createElement('h4'),{textContent:'DAY1 ROBOTICS'}))">
+      <p style="font-size:.9rem;opacity:.85;max-width:32ch">Startup mexicana de robótica.
+        Plataformas y servicios para limpiar los cuerpos de agua del país.</p>
+    </div>
+    <div>
+      <h4>Sitio</h4>
+      <ul>
+        <li><a href="productos.html">Productos</a></li>
+        <li><a href="servicios.html">Servicios</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Kaax</h4>
+      <ul>
+        <li><a href="kaax.html">Cómo funciona</a></li>
+        <li><a href="kaax.html#codigo">La estación de control</a></li>
+        <li><a href="kaax.html#finanzas">Costos</a></li>
+        <li><a href="https://dquezada2108.github.io/kaax_app/" target="_blank" rel="noopener">Abrir la app</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="https://www.instagram.com/day1robotics/" target="_blank" rel="noopener">Instagram · @day1robotics</a></li>
+        <li><a href="tel:+525630229339">+52 56 3022 9339</a></li>
+        <li>México</li>
+      </ul>
+    </div>
+  </div>
+  <div class="fbottom">
+    <span>© <span id="year"></span> DAY1 Robotics</span>
+    <span>Hecho en México</span>
+  </div>
+</footer>
+<script src="assets/site.js?v=6cb73a52"></script>
+<script type="importmap">
+{ "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+<script type="module" src="assets/escena.js?v=241ad78f"></script>
+</body>
+</html>

@@ -25,13 +25,13 @@ MENU = [("index.html", "Inicio"), ("productos.html", "Productos"),
 PAGINAS = {
   "index.html": ("Robótica para el agua de México",
       "DAY1 Robotics: startup mexicana de robótica acuática. Plataformas remotas y servicios de limpieza y consultoría para cuerpos de agua.",
-      ["inicio", "igtira", "problema", "resumen", "testimonios"], True),
+      ["inicio", "igtira", "problema", "comunidad", "etica", "rutas", "testimonios"], True),
   "productos.html": ("Productos",
       "Kaax, plataforma acuática remota de usos múltiples, y las configuraciones Obsidian y Maelstrom en desarrollo.",
-      ["productos"], False),
+      ["respuesta", "productos", "comparativa"], False),
   "kaax.html": ("Kaax · la plataforma",
-      "Cómo funciona Kaax: el prototipo, la estación de control y los costos.",
-      ["prototipo", "codigo", "finanzas"], True),
+      "Cómo funciona Kaax: visión por computadora, pruebas de campo, validación con especialistas y la estación de control.",
+      ["prototipo", "ia", "validacion", "codigo"], True),
   "servicios.html": ("Servicios",
       "Limpieza de cuerpos de agua y consultoría en tecnologías del agua.",
       ["servicios"], False),
@@ -149,9 +149,13 @@ def pagina(archivo, titulo, desc, partes, tres):
 </head>
 <body>
 
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+
 {nav(archivo, 'inicio' in partes)}
 
+<main id="contenido">
 {cuerpo}
+</main>
 
 {PIE}
 <script src="{version("assets/site.js")}"></script>{imports}

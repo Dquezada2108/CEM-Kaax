@@ -15,9 +15,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=a72dd924">
+<link rel="stylesheet" href="assets/site.css?v=96494b1b">
 </head>
 <body>
+
+<a class="saltar" href="#contenido">Saltar al contenido</a>
 
 <nav class="nav stuck" id="nav">
   <a href="index.html" class="mark" aria-label="DAY1 Robotics">
@@ -40,6 +42,39 @@
   </div>
 </nav>
 
+<main id="contenido">
+<section id="respuesta">
+  <div class="wrap">
+    <p class="eyebrow reveal">La respuesta actual</p>
+    <h2 class="reveal">La maquinaria pesada destruye lo que viene a proteger</h2>
+    <p class="lead reveal" style="max-width:58ch">Hoy el problema se atiende con excavadoras y
+      camiones en la playa. El remedio deja su propio daño, y la norma ya lo reconoce.</p>
+
+    <div class="grid g3" style="margin-top:34px">
+      <article class="card">
+        <div class="ic" aria-hidden="true">▣</div>
+        <h3>54% de la arena</h3>
+        <p>se perdió en Puerto Morelos en un año. La playa pasó de 31 a 15 metros de ancho.</p>
+        <p class="src">Silva et al. (2020), <i>Water</i></p>
+      </article>
+      <article class="card">
+        <div class="ic" aria-hidden="true">◍</div>
+        <h3>Tortugas y nidos</h3>
+        <p>destruidos por excavadoras dentro de un Parque Nacional y humedales Ramsar, con
+          denuncias ante PGR y PROFEPA.</p>
+        <p class="src">El Universal (2015)</p>
+      </article>
+      <article class="card">
+        <div class="ic" aria-hidden="true">⊘</div>
+        <h3>Ya está prohibido</h3>
+        <p>el uso de maquinaria en la zona seca de la playa y en sitios de anidación. La norma
+          apunta a equipos ligeros de baja presión.</p>
+        <p class="src">Lineamientos SEMARNAT (2021)</p>
+      </article>
+    </div>
+  </div>
+</section>
+
 <section id="productos">
   <div class="wrap">
     <div class="eyebrow reveal">Lo que construimos</div>
@@ -51,7 +86,7 @@
 
     <article class="producto reveal" style="margin-top:38px">
       <div class="foto">
-        <img src="assets/kaax_blueprint.jpg" alt="Kaax, vista técnica de la plataforma" loading="lazy">
+        <img src="assets/kaax_blueprint.jpg" alt="Kaax, vista técnica de la plataforma" loading="lazy" width="1700" height="1062">
       </div>
       <div class="cuerpo">
         <span class="etiqueta">Plataforma base · en operación</span>
@@ -99,6 +134,72 @@
   </div>
 </section>
 
+<section id="comparativa" class="tint-soft">
+  <div class="wrap">
+    <p class="eyebrow reveal">Por qué otra máquina</p>
+    <h2 class="reveal">Lo que ya existe cubre una parte</h2>
+    <p class="lead reveal" style="max-width:60ch">Hay buenas soluciones en el mundo, pero
+      ninguna resuelve a la vez las cinco condiciones que impone un cuerpo de agua mexicano.</p>
+
+    <div class="scroller" style="margin-top:32px">
+      <table class="comp">
+        <caption class="sr-only">Comparación de enfoques de limpieza según cinco condiciones</caption>
+        <thead>
+          <tr>
+            <th scope="col">Enfoque</th>
+            <th scope="col">Contaminantes<br>químicos</th>
+            <th scope="col">Contaminantes<br>biológicos</th>
+            <th scope="col">Zona<br>somera</th>
+            <th scope="col">Eléctrico</th>
+            <th scope="col">Opera en<br>México</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="yo">
+            <th scope="row">Kaax</th>
+            <td data-v="si"><span class="sr-only">Sí</span></td><td data-v="si"><span class="sr-only">Sí</span></td>
+            <td data-v="si"><span class="sr-only">Sí</span></td><td data-v="si"><span class="sr-only">Sí</span></td>
+            <td data-v="si"><span class="sr-only">Sí</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Drones de superficie importados</th>
+            <td data-v="si"><span class="sr-only">Sí</span></td><td data-v="si"><span class="sr-only">Sí</span></td>
+            <td data-v="no"><span class="sr-only">No</span></td><td data-v="si"><span class="sr-only">Sí</span></td>
+            <td data-v="no"><span class="sr-only">No</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Barredoras de residuos en río</th>
+            <td data-v="si"><span class="sr-only">Sí</span></td><td data-v="no"><span class="sr-only">No</span></td>
+            <td data-v="no"><span class="sr-only">No</span></td><td data-v="si"><span class="sr-only">Sí</span></td>
+            <td data-v="no"><span class="sr-only">No</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Buques sargaceros</th>
+            <td data-v="no"><span class="sr-only">No</span></td><td data-v="si"><span class="sr-only">Sí</span></td>
+            <td data-v="no"><span class="sr-only">No</span></td><td data-v="no"><span class="sr-only">No</span></td>
+            <td data-v="si"><span class="sr-only">Sí</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Cosechadoras de lirio</th>
+            <td data-v="no"><span class="sr-only">No</span></td><td data-v="si"><span class="sr-only">Sí</span></td>
+            <td data-v="no"><span class="sr-only">No</span></td><td data-v="no"><span class="sr-only">No</span></td>
+            <td data-v="si"><span class="sr-only">Sí</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Cuadrilla manual</th>
+            <td data-v="si"><span class="sr-only">Sí</span></td><td data-v="si"><span class="sr-only">Sí</span></td>
+            <td data-v="no"><span class="sr-only">No</span></td><td data-v="no"><span class="sr-only">No</span></td>
+            <td data-v="si"><span class="sr-only">Sí</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src reveal" style="margin-top:14px">Categorías de enfoque, no marcas. Zona somera:
+      menos de un metro de calado, donde se acumula el sargazo y no entra una embarcación mayor.</p>
+  </div>
+</section>
+</main>
+
 <footer>
   <div class="fgrid">
     <div>
@@ -140,6 +241,6 @@
     <span>Hecho en México</span>
   </div>
 </footer>
-<script src="assets/site.js?v=5b98a4d0"></script>
+<script src="assets/site.js?v=c6b09c03"></script>
 </body>
 </html>

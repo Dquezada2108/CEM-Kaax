@@ -4,20 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Kaax · la plataforma · DAY1 Robotics</title>
-<meta name="description" content="Cómo funciona Kaax: el prototipo, la estación de control y los costos.">
+<meta name="description" content="Cómo funciona Kaax: visión por computadora, pruebas de campo, validación con especialistas y la estación de control.">
 <meta name="theme-color" content="#255764">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon-512.png">
 <link rel="apple-touch-icon" href="assets/favicon-180.png">
 <meta property="og:title" content="Kaax · la plataforma · DAY1 Robotics">
-<meta property="og:description" content="Cómo funciona Kaax: el prototipo, la estación de control y los costos.">
+<meta property="og:description" content="Cómo funciona Kaax: visión por computadora, pruebas de campo, validación con especialistas y la estación de control.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=a72dd924">
+<link rel="stylesheet" href="assets/site.css?v=96494b1b">
 </head>
 <body>
+
+<a class="saltar" href="#contenido">Saltar al contenido</a>
 
 <nav class="nav stuck" id="nav">
   <a href="index.html" class="mark" aria-label="DAY1 Robotics">
@@ -40,6 +42,7 @@
   </div>
 </nav>
 
+<main id="contenido">
 <section id="prototipo" class="proto">
   <div class="wrap">
     <div class="eyebrow reveal">La tecnología</div>
@@ -86,11 +89,11 @@
 
       <div class="shots">
         <figure class="shot">
-          <img src="assets/campo1.jpg" alt="Kaax navegando en la presa" loading="lazy">
+          <img src="assets/campo1.jpg" alt="Kaax navegando en la presa" loading="lazy" width="1100" height="649">
           <figcaption>Navegación autónoma sobre agua abierta</figcaption>
         </figure>
         <figure class="shot">
-          <img src="assets/campo2.jpg" alt="Kaax con la electrónica sellada a bordo" loading="lazy">
+          <img src="assets/campo2.jpg" alt="Kaax con la electrónica sellada a bordo" loading="lazy" width="1100" height="649">
           <figcaption>Electrónica sellada sobre la cubierta</figcaption>
         </figure>
       </div>
@@ -136,6 +139,84 @@
   </div>
 </section>
 
+<section id="ia" class="tint-deep">
+  <div class="wrap">
+    <p class="eyebrow reveal">Innovación tecnológica</p>
+    <h2 class="reveal">Visión que sabe cuándo actuar</h2>
+
+    <div class="grid g3" style="margin-top:34px">
+      <article class="card">
+        <div class="ic" aria-hidden="true">◐</div>
+        <h3>Detección por color</h3>
+        <p>El sargazo se identifica como un vector de color en el espacio Lab, con umbral
+          estadístico de tres sigmas, calculado a bordo en la Raspberry Pi.</p>
+      </article>
+      <article class="card">
+        <div class="ic" aria-hidden="true">⇄</div>
+        <h3>Doble modo de control</h3>
+        <p>Teleoperación desde la estación, y modo autónomo acotado a diez minutos, siempre
+          bajo supervisión humana.</p>
+      </article>
+      <article class="card">
+        <div class="ic" aria-hidden="true">◈</div>
+        <h3>Rutas predictivas</h3>
+        <p>Datos satelitales de arribo de sargazo para pasar de la limpieza reactiva a la
+          planificada: limpiar antes del arribo, no después.</p>
+      </article>
+    </div>
+
+    <blockquote class="principio reveal">
+      <p><b>Ética de la IA:</b> ante la duda, no captar. Un falso positivo tiene consecuencia
+        física sobre fauna viva.</p>
+    </blockquote>
+  </div>
+</section>
+
+<section id="validacion">
+  <div class="wrap">
+    <p class="eyebrow reveal">Validación e implementación</p>
+    <h2 class="reveal">Probado en el agua y revisado por especialistas</h2>
+
+    <div class="grid g2" style="margin-top:34px;align-items:start">
+      <div>
+        <h3 class="sub reveal">Pruebas del prototipo</h3>
+        <ul class="prueba">
+          <li><b>Flotabilidad.</b> Todas las pruebas flotaron y se desplazaron correctamente.</li>
+          <li><b>Carga útil.</b> Cuatro kilos transportados manteniendo operación estable.</li>
+          <li><b>Impermeabilización.</b> Componentes sellados, sin filtraciones en pruebas.</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="sub reveal">Revisión con especialistas</h3>
+        <ul class="experto">
+          <li>
+            <b>Dra. Andrea Guevara</b>
+            <span>Doctora en materiales avanzados</span>
+            <p>Validó el uso de ASA y las condiciones de impresión 3D de la carcasa.</p>
+          </li>
+          <li>
+            <b>Mtro. Jorge Alberto Arriaga Medina</b>
+            <span>Coordinador Ejecutivo del Centro Regional de Seguridad Hídrica</span>
+            <p>Organizador del Premio Nacional Juvenil del Agua.</p>
+          </li>
+          <li>
+            <b>Especialista en sustentabilidad</b>
+            <span>Maestría en sustentabilidad</span>
+            <p>Validó el uso de energía solar y propuso la detección por vectores de color.</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="norma reveal">
+      <h3>Marco normativo resuelto</h3>
+      <p>Kaax opera como embarcación menor conforme a la Ley de Navegación y Comercio
+        Marítimos, bajo autoridad de SEMAR, cumpliendo los lineamientos de SEMARNAT y los
+        principios del Código MASS de la OMI.</p>
+    </div>
+  </div>
+</section>
+
 <section id="codigo" class="tint-deep">
   <div class="wrap">
     <div class="eyebrow reveal">El software</div>
@@ -146,19 +227,19 @@
       señal.</p>
 
     <figure class="shotbig reveal">
-      <img src="assets/app-flota.png" alt="Vista de flota: mapa en vivo, control y telemetría" loading="lazy">
+      <img src="assets/app-flota.png" alt="Vista de flota: mapa en vivo, control y telemetría" loading="lazy" width="1240" height="775">
       <figcaption><b>Flota.</b> Posición de cada robot en el mapa, telemetría en vivo,
         control por teclado o mando, y los rodillos de recolección.</figcaption>
     </figure>
 
     <div class="grid g2" style="margin-top:18px">
       <figure class="shotbig reveal">
-        <img src="assets/app-cuadricula.png" alt="Cuadrícula de limpieza sobre el mapa" loading="lazy">
+        <img src="assets/app-cuadricula.png" alt="Cuadrícula de limpieza sobre el mapa" loading="lazy" width="1240" height="775">
         <figcaption><b>Cuadrícula.</b> La zona se divide en cuadrantes y los que el robot
           recorre se marcan solos con el GPS.</figcaption>
       </figure>
       <figure class="shotbig reveal">
-        <img src="assets/app-reportes.png" alt="Reportes con indicadores y gráfica por jornada" loading="lazy">
+        <img src="assets/app-reportes.png" alt="Reportes con indicadores y gráfica por jornada" loading="lazy" width="1240" height="775">
         <figcaption><b>Reportes.</b> Kilos por tipo de contaminante, área barrida,
           distancia y ritmo, jornada por jornada.</figcaption>
       </figure>
@@ -190,90 +271,7 @@
     </div>
   </div>
 </section>
-
-<section id="finanzas" class="tint-soft">
-  <div class="wrap">
-    <div class="eyebrow reveal">Cuentas claras</div>
-    <h2 class="reveal">Finanzas</h2>
-    <p class="lead reveal" style="margin-bottom:30px">Qué cuesta construir un Kaax y de dónde
-      sale el dinero.</p>
-
-    <div class="price reveal">
-      <div class="p hi">
-        <h3>Venta</h3>
-        <div class="amt">$25,000<span class="per"> / unidad</span></div>
-        <p>Robot, mecanismo de captación, estación de control y capacitación.</p>
-      </div>
-      <div class="p">
-        <h3>Suscripción</h3>
-        <div class="amt">$800<span class="per"> / mes</span></div>
-        <p>Soporte, refacciones de desgaste y plataforma de datos.</p>
-      </div>
-    </div>
-
-    <div class="card reveal" style="margin-top:20px">
-      <h3>Costo unitario de producción</h3>
-      <p style="color:var(--ink-2);font-size:.9rem;margin-bottom:4px">El costo por unidad
-         cae a menos de la mitad al pasar de una pieza a una serie de cincuenta.</p>
-      <div class="bars" id="bars">
-        <div class="bar"><span class="t">1 unidad</span><span class="track"><i class="fill" data-v="16000"></i></span><span class="v">$16,000</span></div>
-        <div class="bar"><span class="t">10 unidades</span><span class="track"><i class="fill" data-v="9000"></i></span><span class="v">$9,000</span></div>
-        <div class="bar"><span class="t">50 unidades</span><span class="track"><i class="fill" data-v="7000"></i></span><span class="v">$7,000</span></div>
-        <div class="bar"><span class="t">250 unidades</span><span class="track"><i class="fill" data-v="6500"></i></span><span class="v">$6,500</span></div>
-      </div>
-      <p class="src">Punto de equilibrio anual estimado en 50 unidades. Cifras en pesos
-         mexicanos.</p>
-    </div>
-
-    <div class="ctx">
-      <article class="card reveal">
-        <div class="ic">◲</div>
-        <h3>$86 millones</h3>
-        <p>Presupuesto de limpieza de <b>un solo municipio</b> en 2026. El mercado no hay que
-           crearlo: ya existe y ya se gasta.</p>
-        <p class="src">Heraldo de México Quintana Roo (2026)</p>
-      </article>
-      <article class="card reveal">
-        <div class="ic">◳</div>
-        <h3>$90,000 · 9 meses</h3>
-        <p>Costo de jornaleros en Tulum durante nueve meses de temporada, haciendo a mano
-           el trabajo que Kaax automatiza.</p>
-      </article>
-      <article class="card reveal">
-        <div class="ic">◴</div>
-        <h3>Público objetivo</h3>
-        <p>Municipios y gobiernos estatales · CONAGUA y SEMARNAT · cooperativas pesqueras ·
-           operadores turísticos de la Riviera Maya, Pátzcuaro y Valle de Bravo.</p>
-      </article>
-    </div>
-
-    <div class="card reveal" style="margin-top:20px;padding:0;overflow:hidden">
-      <div style="padding:22px 24px 8px">
-        <h3>Materiales de un robot</h3>
-        <p style="color:var(--muted);font-size:.85rem;margin-top:3px">
-          Costo de materiales de una unidad, en pesos. Es lo que cuesta construirla a mano:
-          no incluye horas de trabajo ni la reducción por volumen del cuadro de arriba.</p>
-      </div>
-      <div class="scroller">
-        <table class="fin">
-          <thead><tr><th>Partida</th><th>Qué incluye</th><th class="n">MXN</th></tr></thead>
-          <tbody>
-            <tr><td>Motores y demás</td><td>Thrusters con ESC, baterías LiPo 4S y GPS</td><td class="n">$3,600</td></tr>
-            <tr><td>Raspberry</td><td>Computadora de a bordo</td><td class="n">$5,000</td></tr>
-            <tr><td>Estructura</td><td>Caja estanca, espuma de flotación y herrajes</td><td class="n">$1,800</td></tr>
-            <tr><td>Filamento</td><td>PLA, PETG y ASA para las piezas impresas</td><td class="n">$538</td></tr>
-            <tr><td>Materiales 1</td><td>Consumibles y ferretería</td><td class="n">$200</td></tr>
-            <tr><td>Materiales 2</td><td>Consumibles y ferretería</td><td class="n">$100</td></tr>
-          </tbody>
-          <tfoot><tr><td colspan="2">Total en materiales</td><td class="n">$11,238</td></tr></tfoot>
-        </table>
-      </div>
-      <p class="finenote">El costo final de producción está redondeado tomando en cuenta
-        rediseños de piezas, tornillería y consumibles. <span>¿A quién no se le ha perdido
-        un tornillo alguna vez?</span></p>
-    </div>
-  </div>
-</section>
+</main>
 
 <footer>
   <div class="fgrid">
@@ -316,7 +314,7 @@
     <span>Hecho en México</span>
   </div>
 </footer>
-<script src="assets/site.js?v=5b98a4d0"></script>
+<script src="assets/site.js?v=c6b09c03"></script>
 <script type="importmap">
 { "imports": {
     "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",

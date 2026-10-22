@@ -3,7 +3,7 @@
 // compania. Esas secciones ahora viven en otra pagina: si el ancla no existe
 // aqui, se manda a donde quedo en vez de dejar al visitante en la portada.
 const MUDANZA = {
-  finanzas: "kaax.html#finanzas", prototipo: "kaax.html#prototipo",
+  finanzas: "kaax.html", prototipo: "kaax.html#prototipo",
   codigo: "kaax.html#codigo", conocenos: "nosotros.html",
   nosotros: "nosotros.html", productos: "productos.html",
   servicios: "servicios.html", contacto: "contacto.html",

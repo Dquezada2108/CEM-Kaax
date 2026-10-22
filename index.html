@@ -15,9 +15,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=a72dd924">
+<link rel="stylesheet" href="assets/site.css?v=96494b1b">
 </head>
 <body>
+
+<a class="saltar" href="#contenido">Saltar al contenido</a>
 
 <nav class="nav" id="nav">
   <a href="index.html" class="mark" aria-label="DAY1 Robotics">
@@ -40,6 +42,7 @@
   </div>
 </nav>
 
+<main id="contenido">
 <header class="hero" id="inicio">
   <!-- El lienzo ocupa la portada entera: asi el modelo dispone de todo el alto
        y no de una franja, que es lo que lo dejaba pequeno. -->
@@ -51,7 +54,7 @@
   <div class="hero-copy">
     <div class="hero-top">
       <img class="logo" src="assets/day1_logo.png" alt="DAY1 Robotics"
-           onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'logo-fallback',textContent:'DAY1'}))">
+           onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'logo-fallback',textContent:'DAY1'}))" width="824" height="360">
       <h1>Robots que limpian<br>el agua de México</h1>
       <p class="origen">Startup mexicana de robótica</p>
     </div>
@@ -82,50 +85,81 @@
     </div>
     <p class="src reveal">SEMARNAT y La Jornada (2026) · CONABIO vía Mongabay (2022) ·
        PlanRemar, UAM–SEMARNAT–ONU (2022)</p>
-
-    <div class="ethic reveal">
-      <div class="big">46.3<span>%</span></div>
-      <div>
-        <h3>Y el costo lo paga la gente con su salud</h3>
-        <p>de las mediciones de sulfuro de hidrógeno en recolectores de sargazo superó el
-           límite mexicano de exposición para jornadas de ocho horas. Comezón, dolores de
-           cabeza, dermatitis y fatiga.</p>
-        <p class="src" style="margin-top:9px">Rodríguez et al. (2026), <i>Harmful Algae</i> 154.
-           UNAM · Universidad de São Paulo. 35 trabajadores monitoreados con sensores,
-           Quintana Roo, 2025.</p>
-      </div>
-    </div>
-
   </div>
 </section>
 
-<section id="quehacemos">
+<section id="comunidad" class="tint-deep">
   <div class="wrap">
-    <div class="eyebrow reveal">En corto</div>
-    <h2 class="reveal">Qué hacemos</h2>
-    <p class="lead reveal" style="max-width:58ch">Construimos la máquina y, si lo necesitas,
-      la operamos nosotros.</p>
-    <div class="grid g3 reveal" style="margin-top:34px">
-      <a class="card enlace" href="productos.html">
-        <div class="ic">◎</div>
-        <h3>La plataforma</h3>
-        <p>Kaax: una plataforma acuática remota de usos múltiples, con una configuración ya
-          en el agua y dos en desarrollo.</p>
-        <span class="mas">Ver productos<i aria-hidden="true">↗</i></span>
-      </a>
+    <p class="eyebrow reveal">Impacto en la comunidad</p>
+    <h2 class="reveal">El costo lo pagan las comunidades</h2>
+    <p class="lead reveal" style="max-width:56ch">No es un problema de paisaje. Es pesca que
+      no se vende, lagos que se vuelven lodo y pueblos que llevan años pidiendo una máquina.</p>
+
+    <div class="casos">
+      <article class="caso">
+        <b class="num">8 <span>toneladas</span></b>
+        <p>de langosta viva perdidas en Punta Herrero, Punta Allen y María Elena por el arribo
+          anticipado de sargazo.</p>
+        <cite>La Jornada, febrero 2026</cite>
+      </article>
+      <article class="caso">
+        <b class="num">75<span>%</span></b>
+        <p>cayó la captura y venta de cinco cooperativas de Isla Mujeres: de 2 toneladas en
+          2025 a 500 kilos en 2026.</p>
+        <cite>24 Horas Quintana Roo, 2026</cite>
+      </article>
+      <article class="caso">
+        <b class="num">9 → 1.2 <span>metros</span></b>
+        <p>bajó la profundidad del lago de Pátzcuaro. Las comunidades purépechas de Ihuatzio y
+          Janitzio llevan seis años pidiendo el desazolve.</p>
+        <cite>Julio Astillero, 2024</cite>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="etica" class="tint-deep">
+  <div class="wrap angosto">
+    <p class="eyebrow reveal">Lo que nos preguntan siempre</p>
+    <h2 class="reveal" style="max-width:20ch">¿Y los empleos?</h2>
+    <p class="lead reveal">Automatizar la recolección <b>no sustituye empleos</b>: retira
+      personas de una exposición tóxica documentada.</p>
+    <div class="dato-fuerte reveal">
+      <b>46.3<span>%</span></b>
+      <p>de las mediciones de sulfuro de hidrógeno en recolectores de sargazo superó el límite
+        mexicano de exposición para jornadas de ocho horas. Comezón, dolores de cabeza,
+        dermatitis y fatiga.</p>
+      <cite>Rodríguez et al. (2026), <i>Harmful Algae</i> 154 · UNAM y Universidad de São Paulo.
+        35 trabajadores monitoreados con sensores, Quintana Roo, 2025.</cite>
+    </div>
+  </div>
+</section>
+
+<section id="rutas" class="tint-soft">
+  <div class="wrap">
+    <p class="eyebrow reveal">Según a qué vengas</p>
+    <h2 class="reveal">Por dónde empezar</h2>
+    <div class="grid g3" style="margin-top:32px">
       <a class="card enlace" href="servicios.html">
-        <div class="ic">◈</div>
-        <h3>Los servicios</h3>
-        <p>Limpieza de cuerpos de agua con nuestra flota, y consultoría para elegir la
-          tecnología correcta antes de gastar.</p>
+        <div class="ic" aria-hidden="true">◎</div>
+        <h3>Tengo un cuerpo de agua</h3>
+        <p>Municipios, operadores turísticos y cooperativas: qué hacemos, cómo se contrata y
+          qué entregamos después de cada jornada.</p>
         <span class="mas">Ver servicios<i aria-hidden="true">↗</i></span>
       </a>
-      <a class="card enlace" href="nosotros.html">
-        <div class="ic">◆</div>
-        <h3>Quiénes somos</h3>
-        <p>Una startup mexicana de robótica. Tres fundadores que diseñan, fabrican y
-          también se meten al agua.</p>
-        <span class="mas">Conócenos<i aria-hidden="true">↗</i></span>
+      <a class="card enlace" href="productos.html">
+        <div class="ic" aria-hidden="true">◈</div>
+        <h3>Quiero entender la máquina</h3>
+        <p>La plataforma, las configuraciones en desarrollo y por qué una sola base aguanta
+          misiones distintas.</p>
+        <span class="mas">Ver la plataforma<i aria-hidden="true">↗</i></span>
+      </a>
+      <a class="card enlace" href="kaax.html">
+        <div class="ic" aria-hidden="true">◆</div>
+        <h3>Quiero el detalle técnico</h3>
+        <p>Visión por computadora, pruebas de campo, revisión con especialistas y el marco
+          normativo bajo el que opera.</p>
+        <span class="mas">Ver la evidencia<i aria-hidden="true">↗</i></span>
       </a>
     </div>
   </div>
@@ -150,6 +184,7 @@
     </div>
   </div>
 </section>
+</main>
 
 <footer>
   <div class="fgrid">
@@ -192,7 +227,7 @@
     <span>Hecho en México</span>
   </div>
 </footer>
-<script src="assets/site.js?v=5b98a4d0"></script>
+<script src="assets/site.js?v=c6b09c03"></script>
 <script type="importmap">
 { "imports": {
     "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",

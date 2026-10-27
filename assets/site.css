@@ -18,7 +18,10 @@
 html{scroll-behavior:smooth;scroll-padding-top:var(--nav)}
 body{font-family:var(--ff);color:var(--ink);background:var(--bg);line-height:1.55;
   -webkit-font-smoothing:antialiased;overflow-x:hidden}
-img{max-width:100%;display:block}
+img{max-width:100%;display:block;height:auto}
+/* height:auto es obligatorio desde que las imagenes llevan los atributos
+   width y height: sin el, un CSS que fija solo el ancho deja que el
+   atributo imponga el alto y la imagen sale deformada. */
 a{color:var(--teal-700);text-decoration:none}
 button{font-family:inherit;cursor:pointer;border:none;background:none}
 
